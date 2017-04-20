@@ -1,0 +1,26 @@
+<html>
+<meta charset="utf-8">
+  <head>
+    <style>
+    a {
+      border: 1px darkgray solid;
+      padding: 7px;
+    }
+
+    a:hover {
+      background-color: darkgray;
+    }
+    </style>
+    <title>Akordide arvutaja kontrolltöö</title>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h1>Anna akord</h1>
+    <p>(ja mitte auto)</p>
+    <form id="chord">
+      <input id="chordname" type="text" name="chordname" placeholder="Akordi nimetus, näiteks 'C'">
+      <a onClick="getPlayedNotes()">Anna noodid</a>
+    </form>
+    <br><p id="chordoutput">(siia ilmuvad noodinimed)</p>
+  </body>
+</html>
