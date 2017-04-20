@@ -6,6 +6,7 @@ public class Triad {
     
     public Triad(int note) {
         this.baseNote = note;
+
     }
 
     public int base() {
