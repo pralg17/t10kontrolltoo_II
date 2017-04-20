@@ -1,0 +1,10 @@
+package Joed;
+
+public class Proov1 {
+    public static void main(String[] args) {
+        Jogi jogi1 = new Jogi("Punane", 100, 300, null, 0);
+        Jogi jogi2 = new Jogi("Kollane",200,500, "Sinine", 75);
+
+
+    }
+}
