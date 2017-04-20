@@ -9,6 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 
 public class Kasutus {
+	
+	@RequestMapping("/kolmkolad")
+	String kolmkolad(String pohitoonid) {
+		if(pohitoonid.equals("c")) {
+			Kolmkola noot = new CKolmkola();
+			return noot.toString();
+		}
+		return null;
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		
 		System.getProperties().put("server.port", 4335);
