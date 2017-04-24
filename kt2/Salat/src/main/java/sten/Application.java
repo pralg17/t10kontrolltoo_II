@@ -27,12 +27,12 @@ public class Application{
 	@RequestMapping("/search")
     String Search(String nimetus){
         if(nimetus.isEmpty()){return "no info";}
-        List<Ained> Salat=manager.findBynimetus(nimetus);
+        List<Salat> salat=manager.findBynimetus(nimetus);
         if(nimetus.isEmpty()){return nimetus+" not found";}
 		StringBuffer sb = new StringBuffer();
-		for(Salat nimetus: nimetus1){
+		for(Salat nimetus1: salat){
 			sb.append("<p>");
-			sb.append("Aine " + nimetus + "Rasvakogus" + Salat.rasvakogus.toString());
+			sb.append("Aine " + nimetus + "Rasvakogus" + nimetus1.rasvakogus.toString());
 			sb.append("</p>");
 		}
 		return sb.toString();
