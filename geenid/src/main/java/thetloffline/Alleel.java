@@ -8,9 +8,8 @@ public class Alleel {
 		if (nimetus == null || nimetus.length() == 0) {
 			throw new RuntimeException("Alleeli nimetus puudub!");
 		}
-
 		this.nimetus = nimetus;
 		this.v22rtus = v22rtus;
 	}
-	// return kui tahta testida, siis tuleb midagi tagastada
+	 // return kui tahta testida, siis tuleb midagi tagastada
 }

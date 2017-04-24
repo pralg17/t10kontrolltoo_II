@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Geenide leht</title>
+	<script>
+		var connection = new XMLHttpRequest();
+		connection.onreadystatechange = displayData;
+		
+		function ajut() {
+			connection.open("GET", "/uusgeen", true);
+			connection.send();
+		}
+
+		function displayData() {
+			document.getElementById("lapseGeen").innerHTML = connection.responseText;
+		}
+		
+		function addNewData() {
+			document.getElementById("alleeliNimetus").value;
+			document.getElementById("emaAlleel1").value;
+			document.getElementById("emaAlleel2").value;
+			document.getElementById("isaAlleel1").value;
+			document.getElementById("isaAlleel2").value;
+		}
+		
+		connection.open("GET", "/Lisa?alleeliNimetus=" + alleeliNimetus + "&emaAlleel1=" + emaAlleel1 + "&emaAlleel2=" + emaAlleel2 + "&isaAlleel1=" + isaAlleel1 + "&isaAlleel2=" + isaAlleel2, true);
+		connection.send();
+
+	</script>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<form>
+		  Alleeli nimi:<br>
+		  <input type = "text" id = "alleeliNimetus"><br>
+		  Ema alleeli v22rtused:<br>
+		  <input type = "text" id = "emaAlleel1"><br>
+		  <input type = "text" id = "emaAlleel2"><br>
+		  Isa alleeli v22rtused:<br>
+		  <input type = "text" id = "isaAlleel1"><br>
+		  <input type = "text" id = "isaAlleel2"><br>
+
+		  <input type="button" value="lisa" onclick="addNewData()">	
+	</form>
+
+	<div id="lapseGeen">Lapse geeni väljastamise koht</div>
+
+</body>
+</html>

@@ -14,12 +14,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RakendusTests {
 
 	@Autowired
-	private TestRestTemplate restTemplate;
+	//private TestRestTemplate restTemplate;
 
 	@Test
-	public void alleeliTest() {
-		Alleel alleel1 = new Alleel("reesus", true);
-		assertEquals("Alleeli nimetus on: reesus ja v22rtus on: true", alleel1.Alleel("reesus", true));
+	public void geeniAvaldumineTrueTest() {
+		Geen s6bralik = new Geen();
+		Alleel reesus1 = new Alleel("reesus", false);
+		Alleel reesus2 = new Alleel("reesus", true);
+		assertEquals(s6bralik.avaldub == true, s6bralik.geeniV22rtus(reesus1, reesus2));
+	}
+
+	@Test
+	public void geeniAvaldumineFalseTest() {
+		Geen s6bralik2 = new Geen();
+		Alleel reesus1 = new Alleel("reesus", false);
+		Alleel reesus2 = new Alleel("reesus", false);
+		assertEquals(s6bralik2.avaldub == false, s6bralik2.geeniV22rtus(reesus1, reesus2));
 	}
 	
 }
