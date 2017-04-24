@@ -43,7 +43,7 @@ public class Chords {
 	@RequestMapping("song")
 	public String song(int tacts) {
 		Song s1 = new Song(tacts);
-		return "Tere";
+		
 	}
 
 	public Triad getTriad(String chord) {
