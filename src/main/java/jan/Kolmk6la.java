@@ -1,5 +1,6 @@
 package jan;
 
+
 public class Kolmk6la{
 	
 	private int p6hitoon;
