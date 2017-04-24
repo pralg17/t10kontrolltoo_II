@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication(exclude = SessionAutoConfiguration.class)
 @RestController
 public class MarkoApplication {
-    Ioon vesinik = new IoonRakendus("H", 12.0, 1);
-    Ioon nitraat = new IoonRakendus("NO3", 62, -1 );
-
-    @RequestMapping("/vesinik/laeng")
-    public int getLaeng(){
-        return vesinik.getLaeng();
-    }
+	public IoonRakendamine vesinik = new IoonRakendamine("H", 12.0, 1);
+    public IoonRakendamine nitraat = new IoonRakendamine("NO3", 62, -1 );
+	public Aine vesiniknitraat = new AineRakendamine(vesinik, nitraat);
 
 
     public static void main(String[] args) {
