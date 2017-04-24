@@ -10,13 +10,58 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class Kasutus {
 	
+	//yhe noodi kaupa
 	@RequestMapping("/kolmkolad")
-	String kolmkolad(String pohitoonid) {
-		if(pohitoonid.equals("c")) {
+	String kolmkolad(String pohitoon) {
+		
+		if(pohitoon.equals("c")) {
 			Kolmkola noot = new CKolmkola();
 			return noot.toString();
 		}
-		return null;
+		
+		if(pohitoon.equals("f")) {
+			Kolmkola noot = new FKolmkola();
+			return noot.toString();
+		}
+		
+		if(pohitoon.equals("g")) {
+			Kolmkola noot = new GKolmkola();
+			return noot.toString();
+		}
+		return "Sisesta C, F, G";
+	}
+	
+	//stringina
+	@RequestMapping("/kolmkolaAkordid")
+	String kolmkolaAkordid(String pohitoonid) {
+		
+		String akordideString = "";
+		String akordJadast = "";
+		
+		for(int i = 0; i < pohitoonid.length(); i++) {
+			
+			akordJadast = pohitoonid.substring(i, i+1);
+			
+			if(akordJadast.equals("c")) {
+				Kolmkola noot = new CKolmkola();
+				akordideString += noot.toString();
+			}
+			
+			if(akordJadast.equals("f")) {
+				Kolmkola noot = new FKolmkola();
+				akordideString += noot.toString();
+			}
+			
+			if(akordJadast.equals("g")) {
+				Kolmkola noot = new GKolmkola();
+				akordideString += noot.toString();
+			}
+			
+			if(!akordJadast.equals("c") && !akordJadast.equals("f") && !akordJadast.equals("g")) {
+				akordideString += "Akordi " + akordJadast.toUpperCase() + " ei saa kuvada<br>";
+			}
+		}
+		return akordideString;
 	}
 	
 	
@@ -25,10 +70,5 @@ public class Kasutus {
 		
 		System.getProperties().put("server.port", 4335);
 		SpringApplication.run(Kasutus.class, args);
-		
-		//Kolmkola c1 = new Kolmkola(60);
-		//System.out.println(c1.toString());
-		
-		
 	}
 }
