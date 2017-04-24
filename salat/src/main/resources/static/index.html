@@ -3,8 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Salat</title>
+    <script>
+        var connection = new XMLHttpRequest();
+        connection.onreadystatechange = foodSubstance;
+
+        function displayAllFoodSubstance() {
+        connection.open("GET", "/listall", true);
+        connection.send();
+        }
+        displayAllFoodSubstance();
+
+        function foodSubstance() {
+            document.getElementById("foodList").innerHTML = connection.responseText;
+        }
+
+        function addNewFoodSubstance() {
+            var toiduaineNimetus = document.getElementById("toiduaineNimetus").value;
+            var toiduaineValgud = document.getElementById("toiduaineValgud").value;
+            var toiduaineRasvad = document.getElementById("toiduaineRasvad").value;
+            var toiduaineSysivesikud = document.getElementById("toiduaineSysivesikud").value;
+            connection.open("GET", "/lisa?nimetus=" + toiduaineNimetus + "&valgud=" +
+                toiduaineValgud + "&rasvad=" + toiduaineRasvad + "&sysivesikud=" + toiduaineSysivesikud, true);
+            connection.send();
+        }
+
+        function deleteSubstance() {
+            var kustutaToiduaine = document.getElementById("deleteSubstanceById").value;
+            connection.open("GET", "/kustuta?id=" + kustutaToiduaine, true);
+            connection.send();
+        }
+
+        function findSubstanceByFat() {
+            var leiaToiduaineRasvMin = document.getElementById("leiaToiduaineRasvMin").value;
+            var leiaToiduaineRasvMax = document.getElementById("leiaToiduaineRasvMax").value;
+            connection.open("GET", "/rasvaOtsing?rasvadMin=" + leiaToiduaineRasvMin + "&rasvadMax=" + leiaToiduaineRasvMax, true);
+            connection.send();
+        }
+
+    </script>
 </head>
 <body>
+
+<h2>Toiduained</h2>
+<table id="foodList"></table>
+
+<h2>Lisa</h2>
+<label>Nimetus</label><br>
+<input id="toiduaineNimetus" type="text"><br>
+<label>Valgud</label><br>
+<input id="toiduaineValgud" type="text"><br>
+<label>Rasvad</label><br>
+<input id="toiduaineRasvad" type="text"><br>
+<label>Sysivesikud</label><br>
+<input id="toiduaineSysivesikud" type="text"><br>
+
+<input type="button" value="lisa" onclick="addNewFoodSubstance()">
+
+
+<h2>Kustuta</h2>
+<label>ID</label><br>
+<input id="deleteSubstanceById" type="text">
+<input type="button" value="kustuta" onclick="deleteSubstance()">
+
+
+<h2>Otsi rasva sisalduse j2rgi</h2>
+<label>RasvMin</label><br>
+<input id="leiaToiduaineRasvMin" type="text"><br>
+<label>RasvMax</label><br>
+<input id="leiaToiduaineRasvMax" type="text"><br>
+<input type="button" value="Otsi" onclick="findSubstanceByFat()">
 
 </body>
 </html>
