@@ -1,11 +1,10 @@
-package alari;
-
+// package com.example;
 public class Vorrand implements Funktsioon{
-	String x;
-	public Vorrand(String x){
+	int x;
+	public Vorrand(int x){
 		this.x=x;
 	}
 	public int f(int kordaja){
-		return kordaja*Integer.parseInt(x);
+		return kordaja*x;
 	}
 }

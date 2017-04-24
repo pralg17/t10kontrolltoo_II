@@ -1,4 +1,3 @@
-package alari;
 
 import org.junit.*;
 import org.junit.Test;
@@ -14,7 +13,8 @@ public class RakendusTest {
 	@Test
 	public void vorrandiTest(){
 		Rakendus r=new Rakendus();
-		Assert.assertEquals("12=3*4",r.vorrand("4"));
+		Funktsioon v=new Vorrand(4);
+		Assert.assertEquals(16.0,r.arvuta(v,4),0.01);
 	}
 
 }
