@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>marko</groupId>
-	<artifactId>rakendus</artifactId>
+	<groupId>com.kontrolltoo</groupId>
+	<artifactId>marko</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>rakendus</name>
-	<description>2.kontroll too</description>
+	<name>marko</name>
+	<description>Java 2.kontrolltöö</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -25,6 +25,10 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
