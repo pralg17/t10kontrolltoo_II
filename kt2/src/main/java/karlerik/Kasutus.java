@@ -64,6 +64,44 @@ public class Kasutus {
 		return akordideString;
 	}
 	
+	//kas kuvada numbrite voi tahtedena ette antud
+	@RequestMapping("/kolmkolaAkordid2")
+	String kolmkolaAkordid2(String kasNumbrites, String pohitoon) {
+		
+		if(pohitoon.equals("c")) {
+			Kolmkola noot = new CKolmkola();
+			return noot.toString(kasNumbrites);
+		}
+		
+		if(pohitoon.equals("f")) {
+			Kolmkola noot = new FKolmkola();
+			return noot.toString(kasNumbrites);
+		}
+		
+		if(pohitoon.equals("g")) {
+			Kolmkola noot = new GKolmkola();
+			return noot.toString(kasNumbrites);
+		}
+		return "Sisesta C, F, G";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public static void main(String[] args) {
