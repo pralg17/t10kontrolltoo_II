@@ -1,3 +1,4 @@
+package Oscar_KT2;
 
 public class River{
     String riverName, whereFlows;
@@ -14,7 +15,7 @@ public class River{
      public void River(String riverName, double riverFlow, double riverLenght){
         this.riverName = riverName;
         this.riverFlow = riverFlow;
-        this.whereFlows = null;
+        this.s = null;
         this.riverLenght = riverLenght;
     }
    public River getFlows(){
