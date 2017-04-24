@@ -17,16 +17,25 @@ public class Rakendus {
 	
 	@RequestMapping("/jogi")
 	public String Jogi() {
-		Joed jogi=new Joed();
-//		jogi.nimi=aaa; 
-		jogi.pikkus=25;
-		jogi.vooluhulk=5;
-//		jogi.sihtjogi=bbb;
-		jogi.suubumisKm=18;
-		
-		return "saan siit kätte pikkuse: " + jogi.pikkus;
+		Joed j1=new Joed("Pirakas", 150, 32, null, 0);
+		Joed j2=new Joed("Keskmik", 88, 15, "Pirakas", 18);
+		Joed j3=new Joed("Pisike", 12, 3, "Keskmik", 67);
+		Joed j4=new Joed("Keskpärane", 57, 12, "Pirakas", 112);
+		Joed j5=new Joed("Nääps", 8, 1, "Pisike", 3);
+
+		return null;
+
 	}
 	
+	@RequestMapping("/ahel")
+	public String Ahel(String nimi) {
+		if (nimi == Jogi.j2.sihtjogi) {
+			return "text";
+		}
+	
+		return null;
+	
+	}
 	
  
     public static void main(String[] args) {
@@ -34,3 +43,5 @@ public class Rakendus {
         SpringApplication.run(Rakendus.class, args);
     }
 }
+
+
