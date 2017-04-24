@@ -1,10 +1,28 @@
 <html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
     <style>
+    /* {
+      display: grid;
+    }*/
+    body {
+      max-width: 720px;
+      margin: 5%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .output {
+      padding: 1%;
+      background: lightgreen;
+      border: 2px green solid;
+      border-radius: 2%;
+    }
     a {
       border: 1px darkgray solid;
       padding: 7px;
+      margin: 3px;
+      display: inline-block;
     }
 
     a:hover {
@@ -21,6 +39,15 @@
       <input id="chordname" type="text" name="chordname" placeholder="Akordi nimetus, näiteks 'C'">
       <a onClick="getPlayedNotes()">Anna noodid</a>
     </form>
-    <br><p id="chordoutput">(siia ilmuvad noodinimed)</p>
+    <br><p id="chordoutput" class="output">(siia ilmuvad noodinimed)</p>
+    <br>
+    <h1>Loo lugu</h1>
+    <form id="song">
+      <input id="songAddChord" type="text" name="songchord" placeholder="Akordi nimetus, näiteks 'C'">
+      <a onClick="Song.addChord()">Lisa akord laulu</a>
+      <br><a onclick="Song.removeLastChord()">Eemalda viimane akord laulust</a>
+    </form>
+    <p id="songoutput" class="output">(siia ilmub laul)</p>
+    <br>
   </body>
 </html>
