@@ -15,17 +15,35 @@ public class Chords {
 
 
 
-	@RequestMapping("/chord")
-	public String chord(String chord) {
-		Triad chordTriad = getTriad(chord);
-		if (chordTriad != null) {
-			int base = chordTriad.base();
-			int bigTert = chordTriad.bigTert();
-			int quint = chordTriad.quint();
-			return "Mängi noodid: " + String.valueOf(base) + " " + String.valueOf(bigTert) + " " + String.valueOf(quint);
-		} else {
-			return "Selle akordi põhinoot on mulle tundmata.";
-		}
+	@RequestMapping("/notes+t")
+	public String chordTones(int chord) {
+		Triad chordTriad = new Triad(chord);
+		return chordTriad.tonesToPlay();
+	}
+
+	@RequestMapping("/notes+l")
+	public String chordTones(int chord) {
+		Triad chordTriad = new Triad(chord);
+		return chordTriad.lettersToPlay();
+	}
+
+
+	@RequestMapping("/letters+t")
+	public String chordLetter(String chord) {
+		Triad chordTriad = new Triad(chord);
+		return chordTriad.tonesToPlay();
+	}
+
+	@RequestMapping("/letters+l")
+	public String chordLetter(String chord) {
+		Triad chordTriad = new Triad(chord);
+		return chordTriad.lettersToPlay();
+	}
+
+	@RequestMapping("song")
+	public String song(int tacts) {
+		Song s1 = new Song(tacts);
+		return "Tere";
 	}
 
 	public Triad getTriad(String chord) {
