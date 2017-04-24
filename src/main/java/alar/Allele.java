@@ -1,25 +1,36 @@
 package alar;
 
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
- * Created by AASA on 20.04.2017.
+ * Created by Alar Aasa on 20.04.2017.
  */
+@Entity
+@Table(name="allele")
 public class Allele {
+    @Id
     private String name;
     private Boolean positive;
 
-    public String getName() {
+    public Allele(String name, Boolean positive){
+        setName(name);
+        setPositive(positive);
+    }
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public Boolean getPositive() {
+    Boolean getPositive() {
         return positive;
     }
 
-    public void setPositive(Boolean positive) {
+    void setPositive(Boolean positive) {
         this.positive = positive;
     }
 
