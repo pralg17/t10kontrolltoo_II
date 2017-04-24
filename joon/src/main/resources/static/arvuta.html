@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Joon võrrand</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = andmedSaabusid;
+        function andmedSaabusid() {
+            document.getElementById("vastus1").innerHTML = xhr.responseText;
+        }
+        function vajutus() {
+            var aadress = "/calc?a=" +
+                document.getElementById("a").value + "&b=" +
+                document.getElementById("b").value + "&x1=" +
+                document.getElementById("x1").value + "&x2=" +
+                document.getElementById("x2").value;
+            xhr.open("GET", aadress, true);
+            xhr.send();
+            console.log(document.getElementById("b").value );
+        }
+        /*    function vajutus2(){
+         xhr.open("GET", "/pudelvaadist", true);
+         xhr.send();
+         }*/
+    </script>
+</head>
+<body>
+<br>
+<label for="a">a</label>
+<input type="text" id="a"><br><br>
+<label for="b">b</label>
+<input type="text" id="b"><br><br>
+<label for="x1">x1</label>
+<input type="text" id="x1"><br><br>
+<label for="x2">x2</label>
+<input type="text" id="x2">
+<p>
+    <input type="button" value="Arvuta" onclick="vajutus()"/>
+</p>
+<div id="vastus1">vastuse koht</div>
+
+</body>
+</html>
