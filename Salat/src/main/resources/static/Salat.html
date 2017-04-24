@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Salatid</title>
+	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange=andmedsaabusid;
+		function andmedsaabusid(){
+			document.getElementById("Otsingu_tulemus").innerHTML = xhr.responseText;
+		}
+	</head>
+</html>
