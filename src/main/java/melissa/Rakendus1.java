@@ -25,12 +25,7 @@ public class Rakendus1{
         m3.i=i2;
 
 		aine a1=new aine("Lämmastikhape", 1);
-		MolMass n1=new MolMass();
-		n1.kogus=1;
-        n1.us=nimetus.LÄMMASTIK;
-        n1.aatommass=14;
-        n1.laeng=1;
-		n1.a=a1;
+	
 		
        
 
@@ -38,6 +33,6 @@ public class Rakendus1{
 	
 		System.out.println(i2.nimetus+" ioonmass on "+((m2.aatommass*m2.kogus)+(m3.aatommass*m3.kogus))+" ja laeng: "+(m2.laeng+m3.laeng));
        
-	   System.out.println(a1.nimetus+" molekulaarmass on "+((m1.aatommass*m1.kogus)+(m2.aatommass*m2.kogus)+(m3.aatommass*m3.kogus))+" ja laeng: "+m1.laeng);
+	   
     }
 }
