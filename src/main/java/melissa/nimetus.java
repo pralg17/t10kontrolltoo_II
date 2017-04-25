@@ -1,5 +1,5 @@
 package melissa;
 
 public enum nimetus{
-	PROOTON, LÄMMASTIK, HAPNIK
+	VESINIK, LÄMMASTIK, HAPNIK
 }
