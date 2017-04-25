@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Toiduained</title>
+    <title>SALAT</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -15,30 +15,30 @@
 </head>
 
 <body>
-<h2>Loetelu</h2>
+<h2>Toiduained</h2>
 <div>
     <table id="foodList"></table>
 </div>
 
 <h2>Lisa toiduaine</h2>
-<label>Nimetus</label><br>
+<label>Toiduaine nimetus</label><br>
 <input id="toiduaine_nimetus" type="text"><br>
-<label>Valgud</label><br>
+<label>Valkude protsent</label><br>
 <input id="valgud_protsent" type="number"><br>
-<label>Rasvad</label><br>
+<label>Rasvade protsent</label><br>
 <input id="rasvad_protsent" type="number"><br>
-<label>Susivesikud</label><br>
+<label>Süsivesikute protsent</label><br>
 <input id="sysivesikud_protsent" type="number"><br>
 
 <input type="button" class="btn btn-info" value="lisa" onclick="addNewFood()">
 
 <h2>Kustuta</h2>
-<label>ID</label><br>
+<label>Toiduaine id</label><br>
 <input id="deleteFoodByID" type="text">
 <input type="button" class="btn btn-info" value="kustuta" onclick="deleteFood()">
 
-<h2>Otsi rasvasisalduse vahemiku jargi </h2>
-<label>Miinimum</label>
+<h2>Otsi rasvasisalduse vahemiku järgi </h2>
+<label>Minimum</label>
 <input id="findFoodFatMin" type="number"><br>
 <label>Maksimum</label>
 <input id="findFoodFatMax" type="number"><br>
