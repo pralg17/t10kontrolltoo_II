@@ -1,53 +1,75 @@
 package ee.tlu.if16.jaagup;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @SpringBootApplication
-public class Rakendus {
-	@Autowired
-	HttpSession sessioon;
-	//Joogivaat vaat=new Joogivaat();
-	@RequestMapping("/kogusvaadis")
-	public String kogusVaadis(){ //tekitab vaadi kui vaja
-		if(sessioon.getValue("vaat")==null){
-			Joogivaat v=new Joogivaat();
-			v.vaadimaht=500;
-			v.taidetudmaht=300;
-			v.j=new Jook("Kali", 0.3, 1.01);
-			sessioon.putValue("vaat", v);
+
+public class Rakendus{
+	private final TabeliHaldur tabeliHaldur;
+
+    @Autowired
+    public Rakendus(TabeliHaldur tabeliHaldur) {
+        this.tabeliHaldur = tabeliHaldur;
+    }
+
+	@RequestMapping("/listall")
+    String listall(String toiduaine_nimetus) {
+        StringBuffer sb = new StringBuffer();
+        for (Toiduained item : tabeliHaldur.findAll()) {
+            sb.append(item);
+        }
+        String thead = "<tr><th>Id</th><th>Nimetus</th><th>Valgud</th><th>Rasvad</th><th>Susivesikud</th></tr>";
+        return thead + sb.toString();
+    }
+
+    @RequestMapping("/lisa")
+    String lisa(String toiduaine_nimetus, Integer valgud_protsent, Integer rasvad_protsent, Integer sysivesikud_protsent) {
+        Toiduained toiduained = new Toiduained();
+        toiduained.toiduaine_nimetus = toiduaine_nimetus;
+				toiduained.valgud_protsent = valgud_protsent;
+				toiduained.rasvad_protsent = rasvad_protsent;
+				toiduained.sysivesikud_protsent = sysivesikud_protsent;
+
+
+				if((valgud_protsent + rasvad_protsent + sysivesikud_protsent) > 100){
+					return toiduained.protsendiError();
+				}else{
+					tabeliHaldur.save(toiduained);
+	        return "Lisatud " + toiduaine_nimetus + valgud_protsent + rasvad_protsent + sysivesikud_protsent;
+				}
+
+    }
+
+ @RequestMapping("/kustuta")
+  String kustuta(Integer id) {
+        Toiduained toiduained = tabeliHaldur.findOne(id);
+        tabeliHaldur.delete(toiduained);
+      return toiduained.toiduaine_nimetus + " " + " on kustutatud";
+    }
+
+
+		@RequestMapping("/rasvaotsing")
+		public String rasvaotsing(double rasvad_min, double rasvad_max){
+			StringBuffer sb = new StringBuffer();
+			for(Toiduained item : tabeliHaldur.findAll()){
+				if(item.rasvad_protsent > rasvad_min && item.rasvad_protsent < rasvad_max){
+					sb.append(item);
+				}
+			}
+			String thead = "<tr><th>Id</th><th>Nimetus</th><th>Valgud</th><th>Rasvad</th><th>Susivesikud</th></tr>";
+         return thead + sb.toString();
 		}
-		Joogivaat v1=(Joogivaat)sessioon.getValue("vaat");
-		return "Vaadis "+v1.j.nimetus+
-		       ", alles "+v1.taidetudmaht+" liitrit.";
+
+    public static void main(String[] args) {
+        System.getProperties().put("server.port", 12234);
+        SpringApplication.run(Rakendus.class, args);
+    }
 	}
-	
-	@RequestMapping("/pudelvaadist")
-	public String pudelVaadist(){ //eeldab vaadi olemasolu
-		Joogivaat v1=(Joogivaat)sessioon.getValue("vaat");
-		if(v1==null){return "vaat puudub";}
-		Joogipudel suurpudel=new Joogipudel();
-		suurpudel.tyyp=Pudelityyp.PLASTIK;
-		suurpudel.pudelimass=0.08;
-		suurpudel.taarahind=0.1;
-		suurpudel.maht=1.5;
-		Joogipudel villitudpudel=v1.villi(suurpudel);
-		if(villitudpudel==null){return "villimisprobleem";}
-		return "Villiti "+suurpudel.j.nimetus+", "+suurpudel.maht+" liitrit. "+
-		  kogusVaadis();
-	}
-	
-	public static void main(String[] args) {
-		System.getProperties().put("server.port", 43201);
-		SpringApplication.run(Rakendus.class);
-	}
-}
 
 //Kiirem käivitus
 //java -Djava.security.egd=file:/dev/./urandom -jar demo.jar"
-

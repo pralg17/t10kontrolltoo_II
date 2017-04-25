@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toiduained</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        th {
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+<body>
+<h2>Loetelu</h2>
+<div>
+    <table id="foodList"></table>
+</div>
+
+<h2>Lisa toiduaine</h2>
+<label>Nimetus</label><br>
+<input id="toiduaine_nimetus" type="text"><br>
+<label>Valgud</label><br>
+<input id="valgud_protsent" type="number"><br>
+<label>Rasvad</label><br>
+<input id="rasvad_protsent" type="number"><br>
+<label>Susivesikud</label><br>
+<input id="sysivesikud_protsent" type="number"><br>
+
+<input type="button" class="btn btn-info" value="lisa" onclick="addNewFood()">
+
+<h2>Kustuta</h2>
+<label>ID</label><br>
+<input id="deleteFoodByID" type="text">
+<input type="button" class="btn btn-info" value="kustuta" onclick="deleteFood()">
+
+<h2>Otsi rasvasisalduse vahemiku jargi </h2>
+<label>Miinimum</label>
+<input id="findFoodFatMin" type="number"><br>
+<label>Maksimum</label>
+<input id="findFoodFatMax" type="number"><br>
+<input type="button" class="btn btn-info" value="Otsi" onclick="findFoodByFat()">
+
+<script>
+    var connection = new XMLHttpRequest();
+    connection.onreadystatechange = foodData;
+
+    function displayAllFood() {
+        connection.open("GET", "/listall", true);
+        connection.send();
+    }
+    displayAllFood();
+
+    function addNewFood() {
+        var toiduaine_nimetus = document.getElementById("toiduaine_nimetus").value;
+        var valgud_protsent = document.getElementById("valgud_protsent").value;
+		    var rasvad_protsent = document.getElementById("rasvad_protsent").value;
+		    var sysivesikud_protsent = document.getElementById("sysivesikud_protsent").value;
+        connection.open("GET", "/lisa?toiduaine_nimetus=" + toiduaine_nimetus + "&valgud_protsent=" +
+            valgud_protsent + "&rasvad_protsent=" + rasvad_protsent + "&sysivesikud_protsent=" + sysivesikud_protsent, true);
+        connection.send();
+    }
+
+    function deleteFood() {
+        var deleteFood = document.getElementById("deleteFoodByID").value;
+        connection.open("GET", "/kustuta?id=" + deleteFood, true);
+        connection.send();
+    }
+
+    function foodData() {
+        document.getElementById("foodList").innerHTML = connection.responseText;
+    }
+
+    function findFoodByFat(){
+      var findFoodFatMin = document.getElementById("findFoodFatMin").value;
+      var findFoodFatMax = document.getElementById("findFoodFatMax").value;
+      connection.open("GET","/rasvaotsing?rasvad_min=" + findFoodFatMin + "&rasvad_max=" + findFoodFatMax, true);
+      connection.send();
+    }
+
+</script>
+</body>
+
+
+</html>
