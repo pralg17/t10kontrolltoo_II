@@ -1,14 +1,20 @@
-package johan;
-import org.junit.*;
-import static org.junit.Assert.*;
 
-public class Automaattest{
+import org.junit.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
+
+public class Automaattest {
 	@Test
-	public void Yvaartus(){
-		Rakendus r = new Rakendus();
-		/*assertEquals("Sirgel y=3x, kus x=5 on y-i v22rtus: 15", r.yVaartuseleidja("5"));*/
-		Assert.assertEquals("15=3*5",r.yVaartuseleidja("5"));
-		
+	public void tehteTest(){
+		Rakendus r=new Rakendus();
+		Funktsioon v=new Tehe(4);
+		Assert.assertEquals(16.0,r.arvuta(v,4),0.01);
 	}
-	
+
 }
