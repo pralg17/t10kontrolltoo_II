@@ -1,0 +1,45 @@
+{% extends "public/base.html" %}
+
+{% block content %}
+    <form action="/toidud/" method="get">
+        <label for="r">Retsept</label>
+        <input type="text" name="r" id="r">
+        <input type="submit" value="Search">
+    </form>
+    <table>
+        <tr>
+            <th>
+                Nimetus
+            </th>
+            <th>
+                Valgud
+            </th>
+            <th>
+                Rasvad
+            </th>
+            <th>
+                Süsivesikud
+            </th>
+        </tr>
+        <tr>
+            <td>
+                {{ toit.nimetus }}
+            </td>
+            <td>
+                {{ valgud }}
+            </td>
+            <td>
+                {{ rasvad}}
+            </td>
+            <td>
+                {{ sysivesikud }}
+            </td>
+        </tr>
+        {% for x in toiduained %}
+            <tr>
+                <td>{{ x.nimetus }}</td>
+                <td>{{ x.kogus }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "public/base.html" %}
+
+{% block content %}
+    <form action="/search/" method="get">
+        <label for="x1">Alumine piir</label>
+        <input type="number" name="x1" id="x1">
+        <label for="x2">Ülemine piir</label>
+        <input type="number" name="x2" id="x2">
+        <input type="submit" value="Search">
+    </form>
+    <tr>
+        <th>
+            Nimetus
+        </th>
+    </tr>
+    {% for x in list1 %}
+        <tr>
+            <td>
+                <a href="/edit/{{ x.id }}">{{ x.nimetus }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
