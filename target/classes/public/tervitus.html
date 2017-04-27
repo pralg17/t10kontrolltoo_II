@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+	var yhendus=new XMLHttpRequest();
+	yhendus.onreadystatechange=andmedSaabusid;
+	function vajutus(){
+		var a1=document.getElementById("kast1").value;
+		var a2=document.getElementById("kast2").value;
+		if(a2.length<1){
+			yhendus.open("GET","/joon2?x="+a1+"&a=0", true);
+			yhendus.send();
+		}else{
+			yhendus.open("GET","/joon2?x="+a1+"&a="+a2, true);
+			yhendus.send();
+		}
+	}
+	function andmedSaabusid(){
+		document.getElementById("vastus").innerHTML=yhendus.responseText;
+	}
+	
+
+
+	</script>
+</head>
+<body>
+    <h1>Arvutamine</h1>
+	<input type="text" id="kast1" name="x"/>
+	<input type="text" id="kast2" name="y"/>
+	<input type="button" value="Arvuta" onclick="vajutus()"/>
+	<br><br>
+	<div id="vastus">Vastuse koht</div>
+</body>
+</html>
