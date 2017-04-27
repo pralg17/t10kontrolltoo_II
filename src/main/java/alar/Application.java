@@ -48,13 +48,49 @@ public class Application {
                     append(item.getName()).
                     append("</td><td>").
                     append(item.getAllele1().getName()).
+                    append("(").
+                    append(item.getAllele1().positiveToString()).
+                    append(")").
                     append("</td><td>").
                     append(item.getAllele2().getName()).
+                    append("(").
+                    append(item.getAllele2().positiveToString()).
+                    append(")").
                     append("</td><td>").
                     append(item.positiveToString()).
                     append("</td></tr>");
         }
         return sb.toString();
+    }
+    @RequestMapping("/selectAllAlleles")
+    public String selectAllAlleles(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Allele item: alleleDao.findAll()){
+            stringBuilder.append("<option value='")
+                    .append(item.getId())
+                    .append("'>")
+                    .append(item.getName())
+                    .append("(")
+                    .append(item.positiveToString())
+                    .append(")")
+                    .append("</option>");
+        }
+        return stringBuilder.toString();
+    }
+
+    @RequestMapping("/selectAllGenes")
+    public String selectAllGenes(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Gene item: geneDao.findAll()){
+            stringBuilder.append("<option value='")
+                    .append(item.getId())
+                    .append("'>")
+                    .append(item.getName())
+                    .append(" (ID: ")
+                    .append(item.getId())
+                    .append(")</option>");
+        }
+        return stringBuilder.toString();
     }
 
     @RequestMapping("/createallele")
@@ -65,7 +101,10 @@ public class Application {
     }
 
     @RequestMapping("/creategene")
-    public String createGene(String name, Allele allele1, Allele allele2) {
+    public String createGene(String name, String a1, String a2) {
+        Allele allele1 = findAllele(Integer.parseInt(a1));
+        Allele allele2 = findAllele(Integer.parseInt(a2));
+
         if(allele1.getName().equals(allele2.getName())){
             geneDao.save(new Gene(name, allele1, allele2));
             return "New gene created!";
@@ -74,18 +113,19 @@ public class Application {
     }
 
     @RequestMapping("/generategene")
-    public String generateGene(Gene gene1, Gene gene2){
-        Allele allele1 = gene1.getRandomAllele();
-        Allele allele2 = gene2.getRandomAllele();
-        String response = createGene(gene1.getName(), allele1, allele2);
-        return response + "\n Alleles: " + allele1.getName() + "(" + allele1.positiveToString() + "), " +
-                allele2.getName() + "(" + allele2.positiveToString() + ")\n";
-    }
+    public String generateGene(String g1, String g2){
+        Gene gene1 = findGene(Integer.parseInt(g1));
+        Gene gene2 = findGene(Integer.parseInt(g2));
+        if(gene1 != null && gene2 != null){
+            Allele allele1 = gene1.getRandomAllele();
+            Allele allele2 = gene2.getRandomAllele();
+            String response = createGene(gene1.getName(), allele1.getId().toString(), allele2.getId().toString());
+            return response + "\n Alleles: " + allele1.getName() + "(" + allele1.positiveToString() + "), " +
+                    allele2.getName() + "(" + allele2.positiveToString() + ")\n";
+        } else {
+            return "Genes with the ID " + g1 + " and/or " + g2 + " does not exist.";
+        }
 
-    @RequestMapping("/deletegene")
-    public String deleteGene(Gene gene){
-        geneDao.delete(gene);
-        return "Gene deleted!";
     }
 
     @RequestMapping("/searchGene")
@@ -129,11 +169,4 @@ public class Application {
         }
         return result;
     }
-
-//    public Boolean intToBool(Integer num){
-//        if(num<0 || num>1){
-//            throw new IllegalArgumentException("Input more than 0 or 1");
-//        }
-//        return num.equals(1);
-//    }
 }

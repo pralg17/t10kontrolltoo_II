@@ -75,7 +75,7 @@ public class Gene {
 
 
 
-    public Allele getRandomAllele() {
+    Allele getRandomAllele() {
         Random rng = new Random();
         int low = 1;
         int high = 2;
@@ -86,7 +86,7 @@ public class Gene {
         return getAllele2();
     }
 
-    public String positiveToString(){
+    String positiveToString(){
         if(positive){
             return "Positive";
         } else {
