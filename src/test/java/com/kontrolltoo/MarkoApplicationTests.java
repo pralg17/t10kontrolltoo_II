@@ -27,6 +27,12 @@ public class MarkoApplicationTests {
 		assertEquals(r.vesiniknitraat.getName(), "HNO3");
 	}
 
+	@Test
+	public void checkChargeFailure(){assertEquals(r.makeFailure(), "You don goofed");}
+
+	@Test
+    public void checkNameOrder(){assertEquals(r.vesinikfloriid.getName(), "HF");}
+
 
 
 }

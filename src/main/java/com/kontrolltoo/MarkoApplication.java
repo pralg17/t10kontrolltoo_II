@@ -13,7 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class MarkoApplication {
 	public IoonRakendamine vesinik = new IoonRakendamine("H", 12.0, 1);
     public IoonRakendamine nitraat = new IoonRakendamine("NO3", 62, -1 );
-	public Aine vesiniknitraat = new AineRakendamine(vesinik, nitraat);
+	public IoonRakendamine kloor = new IoonRakendamine("Cl", 8 , -3);
+    public IoonRakendamine floriid = new IoonRakendamine("F", 17,-1);
+
+    public Aine vesinikfloriid = new AineRakendamine(floriid, vesinik);
+    public Aine vesiniknitraat = new AineRakendamine(vesinik, nitraat);
+
+
+    @RequestMapping("/failure")
+    public String makeFailure(){
+        try{
+            Aine failure = new AineRakendamine(vesinik, kloor);
+        }catch (RuntimeException e){
+            return "You don goofed";
+        }
+
+        return null;
+    }
 
 
     public static void main(String[] args) {

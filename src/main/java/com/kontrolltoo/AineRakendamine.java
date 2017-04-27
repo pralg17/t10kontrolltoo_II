@@ -2,29 +2,35 @@ package com.kontrolltoo;
 
 public class AineRakendamine implements Aine{
 
-	IoonRakendamine pos;
-	IoonRakendamine neg;
-	String name;
-	double mass;
-	boolean valid;
-	int charge;
+    private IoonRakendamine pos;
+    private IoonRakendamine neg;
+	private String name;
+	private double mass;
+	private boolean valid;
+    private int charge;
 
-	public AineRakendamine(IoonRakendamine ioon1, IoonRakendamine ioon2){
+	private AineRakendamine(IoonRakendamine ioon1, IoonRakendamine ioon2){
 		if(ioon1.getCharge() > 0){
 			this.pos = ioon1;
 			this.neg = ioon2;
 
 		}else{
-			this.pos = ioon1;
-			this.neg = ioon2;
+			this.pos = ioon2;
+			this.neg = ioon1;
+		}
+
+		this.charge = pos.laeng + neg.laeng;
+		if (charge != 0) {
+			throw new RuntimeException("Laengud ei ole null.");
 		}
 
 		this.name = pos.nimetus + neg.nimetus;
 		this.mass = pos.aatom_mass + neg.aatom_mass;
-
-		this.charge = pos.laeng + neg.laeng;
-		this.valid = charge == 0;
 	}
+
+
+
+
 
 	@Override
 	public int giveMass() {
