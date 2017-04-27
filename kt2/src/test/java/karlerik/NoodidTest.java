@@ -75,8 +75,9 @@ public class NoodidTest {
 	public void luguTest() {
 		
 		Lugu mingilugu = new Lugu();
-		String pohitoonid = "c";
-		akordJadast = "";
+		String pohitoonid = "cgf";
+		String akordJadast = "";
+		String kasNumbrites = "1";
 		
 		for(int i = 0; i < pohitoonid.length(); i++) {
 			
@@ -85,9 +86,49 @@ public class NoodidTest {
 			if(akordJadast.equals("c")) {
 				Kolmkola akord = new CKolmkola();
 				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
-			}			
+			}
+			
+			if(akordJadast.equals("g")) {
+				Kolmkola akord = new FKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+			
+			if(akordJadast.equals("f")) {
+				Kolmkola akord = new GKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
 		}
+		assertEquals("60 64 67<br>65 69 72<br>67 71 74<br>", mingilugu.akordid());
+	}
+	
+	@Test
+	public void luguTest2() {
 		
+		Lugu mingilugu = new Lugu();
+		String pohitoonid = "cgf";
+		String akordJadast = "";
+		String kasNumbrites = "0";
+		
+		for(int i = 0; i < pohitoonid.length(); i++) {
+			
+			akordJadast = pohitoonid.substring(i, i+1);
+			
+			if(akordJadast.equals("c")) {
+				Kolmkola akord = new CKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+			
+			if(akordJadast.equals("g")) {
+				Kolmkola akord = new FKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+			
+			if(akordJadast.equals("f")) {
+				Kolmkola akord = new GKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+		}
+		assertEquals("C E G<br>F A C<br>G B D<br>", mingilugu.akordid());
 	}
 	
 	

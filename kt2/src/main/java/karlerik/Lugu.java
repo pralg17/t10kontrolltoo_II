@@ -4,8 +4,8 @@ public class Lugu {
 	
 	String taktid = "";
 	
-	Kolmkola taktijada(Kolmkola takt) {
-		taktid += takt.toString();
+	Kolmkola taktijada(Kolmkola takt, String kasNumbrites) {
+		taktid += takt.toString(kasNumbrites);
 		return null;
 	}
 	

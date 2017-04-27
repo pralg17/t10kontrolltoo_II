@@ -85,6 +85,38 @@ public class Kasutus {
 		return "Sisesta C, F, G";
 	}
 	
+	@RequestMapping("/kolmkolaLugu")
+	String kolmkolaLugu(String kasNumbrites, String akordid) {
+		
+		Lugu mingilugu = new Lugu();
+		String akordJadast = "";
+		
+		for(int i = 0; i < akordid.length(); i++) {
+			
+			akordJadast = akordid.substring(i, i+1);
+			
+			if(akordJadast.equals("c")) {
+				Kolmkola akord = new CKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+			
+			if(akordJadast.equals("g")) {
+				Kolmkola akord = new GKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+			
+			if(akordJadast.equals("f")) {
+				Kolmkola akord = new FKolmkola();
+				Kolmkola looTakt = mingilugu.taktijada(akord, kasNumbrites);
+			}
+			
+			if(!akordJadast.equals("c") && !akordJadast.equals("f") && !akordJadast.equals("g")) {
+				return "Akordi " + akordJadast.toUpperCase() + " ei saa kuvada<br>";
+			}
+		}
+		return mingilugu.akordid();
+	}
+	
 	
 	
 	
