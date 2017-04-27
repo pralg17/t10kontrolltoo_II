@@ -1,0 +1,9 @@
+{% extends "public/base.html" %}
+
+{% block content %}
+<form action="/toiduaineform/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

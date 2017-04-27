@@ -1,0 +1,13 @@
+{% extends "public/base.html" %}
+
+{% block content %}
+{% for x in list1 %}
+    <p>list 1 {{ x }}</p>
+{% endfor %}
+{% for x in list2 %}
+    <p>list 2 {{ x }}</p>
+{% endfor %}
+{% for x in list3 %}
+      <p>list3 {{ x }}</p>
+{% endfor %}
+{% endblock %}

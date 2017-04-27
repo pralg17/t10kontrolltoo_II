@@ -1,0 +1,38 @@
+{% extends "public/base.html" %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>
+            Nimetus
+        </th>
+        <th>
+            Valgud
+        </th>
+        <th>
+            Rasvad
+        </th>
+        <th>
+            Süsivesikud
+        </th>
+    </tr>
+        <tr>
+        <td>
+            {{ toiduaine.nimetus }}
+        </td>
+        <td>
+            {{ toiduaine.valgud }}
+        </td>
+        <td>
+            {{ toiduaine.rasvad }}
+        </td>
+        <td>
+            {{ toiduaine.sysivesikud }}
+        </td>
+        <td>
+            <a href="/delete/{{ toiduaine.id }}">Kustuta</a>
+        </td>
+    </tr>
+</table>
+<p> {{ deleted }}</p>
+{% endblock %}

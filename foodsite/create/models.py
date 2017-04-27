@@ -24,6 +24,18 @@ class Toidukomponent(models.Model):
     def __str__(self):
         return self.toiduaine.nimetus
 
+    def rasvasisaldus(self):
+
+        return self.toiduaine.rasvad * self.kogus
+
+    def valgusisaldus(self):
+
+        return self.toiduaine.valgud * self.kogus
+
+    def sysivesikusisaldus(self):
+
+        return self.toiduaine.sysivesikud * self.kogus
+
 class Toit(models.Model):
     nimetus = models.CharField(max_length=50)
     toidukomponendid = models.ManyToManyField(Toidukomponent, db_constraint=models.CASCADE)
@@ -31,10 +43,35 @@ class Toit(models.Model):
     def __str__(self):
         return self.nimetus
 
+    def kysiValgud(self):
+        kogus = 0
+        komponendid = self.toidukomponendid.all()
+        for k in komponendid:
+            kogus += k.valgusisaldus()
+
+    def kysiRasvad(self):
+        kogus = 0
+        komponendid = self.toidukomponendid.all()
+        for k in komponendid:
+            kogus += k.rasvasisaldus()
+
+    def kysiSysivesikud(self):
+        kogus = 0
+        komponendid = self.toidukomponendid.all()
+        for k in komponendid:
+            kogus += k.sysivesikusisaldus()
+
 class ToiduaineForm(ModelForm):
     class Meta:
         model = Toiduaine
         fields = ['nimetus', 'valgud', 'rasvad', 'sysivesikud']
+
+
+class ToidukomponendiForm(ModelForm):
+    class Meta:
+        model = Toidukomponent
+        fields = ['toiduaine', 'kogus']
+
 
 class ToitForm(ModelForm):
     class Meta:
