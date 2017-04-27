@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salat</title>
+    <script>
+        var connectionToit = new XMLHttpRequest();
+        connection.onreadystatechange = toitSubstance;
+
+
+        function displayToit() {
+            connectionToit.open("GET", "/toit", true);
+            connectionToit.send();
+        }
+        displayToit();
+
+        function toitSubstance() {
+            document.getElementById("toitList").innerHTML = connectionToit.responseText;
+        }
+    </script>
+</head>
+<body>
+
+<h2>Toit</h2>
+<table id="toitList"></table>
+
+</body>
+</html>

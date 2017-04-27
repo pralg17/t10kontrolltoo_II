@@ -7,9 +7,10 @@
         var connection = new XMLHttpRequest();
         connection.onreadystatechange = foodSubstance;
 
+
         function displayAllFoodSubstance() {
-        connection.open("GET", "/listall", true);
-        connection.send();
+            connection.open("GET", "/listall", true);
+            connection.send();
         }
         displayAllFoodSubstance();
 
@@ -72,6 +73,7 @@
 <label>RasvMax</label><br>
 <input id="leiaToiduaineRasvMax" type="text"><br>
 <input type="button" value="Otsi" onclick="findSubstanceByFat()">
+
 
 </body>
 </html>
