@@ -45,11 +45,11 @@ public class Triad {
     }
 
     public String tonesToPlay() {
-        return "Mängi toonid: " + String.valueOf(base()) + " " + String.valueOf(bigTert()) + " " + String.valueOf(quint()) + ".";
+        return "Mängi toonid: " + String.valueOf(base()) + " " + String.valueOf(bigTert()) + " " + String.valueOf(quint()) + ".<br>";
     }
 
     public String lettersToPlay() {
-        return "Mängi noodid: " + noteLetter(base(), notes) + " " + noteLetter(bigTert(), notes) + " " + noteLetter(quint(), notes) + ".";
+        return "Mängi noodid: " + noteLetter(base(), notes) + " " + noteLetter(bigTert(), notes) + " " + noteLetter(quint(), notes) + ".<br>";
     }
 
 }

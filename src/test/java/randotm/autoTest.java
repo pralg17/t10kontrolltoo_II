@@ -37,5 +37,32 @@ public class autoTest {
     	assertEquals(74, note.quint());
     }
 
+    @Test
+    public void tonesFromSong() {
+    	Song s = new Song(4);
+		Triad cChord = new CTriad();
+		Triad gChord = new Triad(67);
+		Triad fChord = new Triad("F");
+		Triad aChord = new Triad("A");
+    	s.addTact(cChord);
+    	s.addTact(gChord);
+    	s.addTact(fChord);
+    	s.addTact(aChord);
+    	assertEquals("Mängi toonid: 60 64 67.<br>Mängi toonid: 67 71 74.<br>Mängi toonid: 65 69 72.<br>Mängi toonid: 69 73 76.<br>", s.writeOutTones());
+    }
+
+    @Test
+    public void lettersFromSong() {
+    	Song s = new Song(4);
+		Triad cChord = new CTriad();
+		Triad gChord = new Triad(67);
+		Triad fChord = new Triad("F");
+		Triad aChord = new Triad("A");
+    	s.addTact(cChord);
+    	s.addTact(gChord);
+    	s.addTact(fChord);
+    	s.addTact(aChord);
+    	assertEquals("Mängi noodid: C E G.<br>Mängi noodid: G H null.<br>Mängi noodid: F A C.<br>Mängi noodid: A null null.<br>", s.writeOutLetters());
+    }
 
 }

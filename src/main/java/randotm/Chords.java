@@ -13,37 +13,86 @@ import javax.servlet.http.HttpSession;
 
 public class Chords {
 
+	@Autowired
+	HttpSession session;
 
+	@RequestMapping("/new_song")
+	public void genSong(int tacts) {
+		Song s = new Song(tacts);
+		session.putValue("song", s);
+	}
 
-	@RequestMapping("/notes+t")
-	public String chordTones(int chord) {
+	@RequestMapping("/add_tact/t")
+	public void addTactToSongByTone(int chordTone) {
+		Song s = (Song)session.getValue("song");
+		Triad chord = new Triad(chordTone);
+		s.addTact(chord);
+		session.putValue("song", s);
+	}
+
+	@RequestMapping("/add_tact")
+	public void addTactToSongByLetter(String chordSymbol) {
+		Song s = (Song)session.getValue("song");
+		/*
+		for(int i=0;i<chordSymbols.length;i++) {
+			if(chordSymbols[i] == Integer.parseInt(chordSymbols[i])) {
+				int chordSymbol = Integer.parseInt(chordSymbols[i]);
+				Triad chord = new Triad(chordSymbol);
+				s.addTact(chord);
+				session.putValue("song", s);
+			} else {
+				String chordSymbol = chordSymbols[i];
+				Triad chord = new Triad(chordSymbol);
+				s.addTact(chord);
+				session.putValue("song", s);
+			}
+			*/
+		try {
+			Triad chord = new Triad(Integer.parseInt(chordSymbol));
+			s.addTact(chord);
+			session.putValue("song", s);
+		} catch(Exception e) {
+			Triad chord = new Triad(chordSymbol);
+			s.addTact(chord);
+			session.putValue("song", s);
+		}
+	}
+
+	@RequestMapping("song/t")
+	public String getSongWithTones() {
+		Song s = (Song)session.getValue("song");
+		return s.writeOutTones();
+	}
+
+	@RequestMapping("song/l")
+	public String getSongWithLetters() {
+		Song s = (Song)session.getValue("song");
+		return s.writeOutLetters();
+	}
+
+	@RequestMapping("/notes/t")
+	public String toneToTones(int chord) {
 		Triad chordTriad = new Triad(chord);
 		return chordTriad.tonesToPlay();
 	}
 
-	@RequestMapping("/notes+l")
-	public String chordTones(int chord) {
+	@RequestMapping("/notes/l")
+	public String toneToLetters(int chord) {
 		Triad chordTriad = new Triad(chord);
 		return chordTriad.lettersToPlay();
 	}
 
 
-	@RequestMapping("/letters+t")
-	public String chordLetter(String chord) {
+	@RequestMapping("/letters/t")
+	public String letterToTones(String chord) {
 		Triad chordTriad = new Triad(chord);
 		return chordTriad.tonesToPlay();
 	}
 
-	@RequestMapping("/letters+l")
-	public String chordLetter(String chord) {
+	@RequestMapping("/letters/l")
+	public String letterToLetters(String chord) {
 		Triad chordTriad = new Triad(chord);
 		return chordTriad.lettersToPlay();
-	}
-
-	@RequestMapping("song")
-	public String song(int tacts) {
-		Song s1 = new Song(tacts);
-		
 	}
 
 	public Triad getTriad(String chord) {

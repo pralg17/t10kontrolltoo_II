@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+	<head>
+		<title>Chord calc</title>
+		<script type="text/javascript">
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = andmedSaabusid;
+			function andmedSaabusid() {
+				document.getElementById("song").innerHTML = xhr.responseText;
+			}
+
+			function addTacts() {
+
+				document.getElementById("genNotes").innerHTML = "";
+
+				//Taktide arv laulus
+				var numberOfTacts = document.getElementById("numberOfTacts").value;
+
+				//Lisan laulu taktidele akordid
+				for(var i=1;i<=numberOfTacts;i++) {
+
+					console.log(i);
+					var chordSymbol = document.getElementById("tact"+i).value;
+					console.log(chordSymbol);
+					xhr.open("GET", "/add_tact?chordSymbol="+chordSymbol, true);
+					xhr.send();
+					console.log("/add_tact?chordSymbol="+chordSymbol);
+					window.setTimeout(function(){}, 500);
+					
+				}
+
+				//Nupp, mis kuvab noodid tähtnimetustena
+				var entry = document.createElement("div");
+				entry.innerHTML = "<input type='button' value='Laulu noodid toonikõrgustena' onclick='genSongTones()' />";
+				document.getElementById("genNotes").appendChild(entry);
+
+				//Nupp, mis kuvab noodid tähtnimetustena
+				var entry = document.createElement("div");
+				entry.innerHTML = "<input type='button' value='Laulu noodid tähtnimedena' onclick='genSongLetters()' />";
+				document.getElementById("genNotes").appendChild(entry);
+
+			}
+
+			function genSongLetters() {
+
+				//Prindin välja kogu laulu noodid
+				xhr.open("GET", "/song/l", true);
+				xhr.send();
+			}
+
+			function genSongTones() {
+
+				//Prindin välja kogu laulu noodid
+				xhr.open("GET", "/song/t", true);
+				xhr.send();
+			}
+
+			function genTacts() {
+
+				//Teen vastuse ala tühjaks
+				document.getElementById("song").innerHTML = "";
+
+				//Kustutan juba olemasolevad kastid
+				var existingFields = document.getElementById("tacts");
+				existingFields.innerHTML = "";
+
+				//Tekitan kastida, 1 iga takti jaoks
+				var numberOfTacts = document.getElementById("numberOfTacts").value;
+				for(var i=1;i<=numberOfTacts;i++) {
+					var entry = document.createElement("div");
+					entry.innerHTML = "Tact " + (i) + "<br><input id='tact" + (i) + "' type='text' />";
+					document.getElementById("tacts").appendChild(entry);
+				};
+
+				//Teen uue laulu
+				xhr.open("GET", "/new_song?tacts="+String(numberOfTacts), true);
+				xhr.send();
+
+				//Nupp, mis lisab laulu taktidele akordid
+				var entry = document.createElement("div");
+				entry.innerHTML = "<br><input type='button' value='Lisa taktidele akordid' onclick='addTacts()'>";
+				document.getElementById("tacts").appendChild(entry);
+
+			}
+
+		</script>
+	</head>
+	<body>
+		<input id="numberOfTacts" type="number" placeholder="Number of tacts in the song" />
+		<input type="button" value="Genereeri akordide väljad" onclick="genTacts()" />
+
+		<br><br>
+		<div id="tacts"></div>
+		<div id="genNotes"></div>
+		<br><br>
+		<div id="song"></div>
+	</body>
+</html> 
