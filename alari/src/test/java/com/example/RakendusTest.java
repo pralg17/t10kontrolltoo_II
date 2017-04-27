@@ -14,7 +14,8 @@ public class RakendusTest {
 	public void vorrandiTest(){
 		Rakendus r=new Rakendus();
 		Funktsioon v=new Vorrand(4);
-		Assert.assertEquals(16.0,r.arvuta(v,4),0.01);
+		Assert.assertEquals(16,r.arvuta(v,4));
+		Assert.assertEquals(12,r.arvuta(v,3));
 	}
 
 }

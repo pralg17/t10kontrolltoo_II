@@ -13,7 +13,9 @@ public class Rakendus {
 	public static void main(String[] arg){
 
 		Funktsioon yArvutaja=new Vorrand(5);
+		Funktsioon yxaArvutaja=new Vorrand2(5, 6);
 		System.out.println(arvuta(yArvutaja, 3));
+		System.out.println(arvuta(yxaArvutaja, 3));
 
 
 		//System.getProperties().put("server.port", 5555);
