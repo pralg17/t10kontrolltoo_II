@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+	var yhendus=new XMLHttpRequest();
+	yhendus.onreadystatechange=andmedSaabusid;
+	function vajutus(){
+		var a1=document.getElementById("kast1").value;
+		var a2=document.getElementById("kast2").value;
+		if (a1.length>0 && a2.length==0){
+			console.log("esimene if");
+			yhendus.open("GET","/xKordaja?x="+a1+"&a=0", true);
+			yhendus.send();
+		}
+		
+		else if(a1.length>0 && a2.length>0){
+			console.log("teine if");
+			yhendus.open("GET","/Vabaliige?x="+a1+"&vabaliige="+a2, true);
+			yhendus.send();
+		}else{
+			console.log("kolmas if");
+			yhendus.open("GET","/Puudu?x0&a=0", true);
+			yhendus.send();
+		}
+		
+		
+	}
+	function andmedSaabusid(){
+		document.getElementById("vastus").innerHTML=yhendus.responseText;
+	}
+	
+	</script>
+</head>
+<body>
+    <h1>Arvutamine</h1>
+	<input type="text" id="kast1" placeholder="xKordaja"/>
+	<input type="text" id="kast2" placeholder="Vabaliige"/>
+	<input type="button" value="Arvuta" onclick="vajutus()"/>
+	<br><br>
+	<div id="vastus">Vastuse koht</div>
+</body>
+</html>
