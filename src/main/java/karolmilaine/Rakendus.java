@@ -16,7 +16,7 @@ public class Rakendus{
     public Rakendus(ToiduainedDao toiduainedDao) {
         this.toiduainedDao = toiduainedDao;
     }
-	
+
 	@RequestMapping("/listall")
     String listall(String nimetus) {
         StringBuffer sb = new StringBuffer();
@@ -31,12 +31,18 @@ public class Rakendus{
     String lisa(String nimetus, Integer valgud, Integer rasvad, Integer susivesikud) {
         Toiduained toiduained = new Toiduained();
         toiduained.nimetus = nimetus;
-		toiduained.valgud = valgud;
-		toiduained.rasvad = rasvad;
-		toiduained.susivesikud = susivesikud;
-        
-        toiduainedDao.save(toiduained);
-        return "Lisatud " + nimetus + valgud + rasvad + susivesikud;
+				toiduained.valgud = valgud;
+				toiduained.rasvad = rasvad;
+				toiduained.susivesikud = susivesikud;
+
+
+				if((valgud + rasvad + susivesikud) > 100){
+					return toiduained.protsendiError();
+				}else{
+					toiduainedDao.save(toiduained);
+	        return "Lisatud " + nimetus + valgud + rasvad + susivesikud;
+				}
+
     }
 
     @RequestMapping("/kustuta")
@@ -46,11 +52,24 @@ public class Rakendus{
         return toiduained.nimetus + " " + toiduained.valgud +  " " + toiduained.rasvad + " " + toiduained.susivesikud + " on kustutatud";
     }
 
+		@RequestMapping("rasvaotsing")
+		public String rasvaotsing(double rasvadmin, double rasvadmax){
+			StringBuffer sb = new StringBuffer();
+			for(Toiduained item : toiduainedDao.findAll()){
+				if(item.rasvad > rasvadmin && item.rasvad < rasvadmax){
+					sb.append(item);
+				}
+			}
+			String thead = "<tr><th>Id</th><th>Nimetus</th><th>Valgud</th><th>Rasvad</th><th>Susivesikud</th></tr>";
+         return thead + sb.toString();
+		}
+		
+
     public static void main(String[] args) {
         System.getProperties().put("server.port", 1234);
         SpringApplication.run(Rakendus.class, args);
     }
-	
+
     /*public static void main(String[] arg){
         Toiduained t1= new Toiduained("kartul", 1.71, 0, 20.1);
         Toiduained t2= new Toiduained("hapukoor", 2.8, 20, 3.2);
@@ -81,10 +100,9 @@ public class Rakendus{
 
 
     }*/
-	
+
 //scl enable rh-maven33 bash
 //mvn package
 //java -jar target/rakendus-1.jar
 //http://greeny.cs.tlu.ee:1234/
 }
-

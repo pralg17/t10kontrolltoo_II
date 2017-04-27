@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Toiduained</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
         th {
@@ -27,13 +30,19 @@
 <label>Susivesikud</label><br>
 <input id="susivesikud" type="number"><br>
 
-<input type="button" value="lisa" onclick="addNewFood()">
+<input type="button" class="btn btn-info" value="lisa" onclick="addNewFood()">
 
 <h2>Kustuta</h2>
 <label>ID</label><br>
 <input id="deleteFoodByID" type="text">
-<input type="button" value="kustuta" onclick="deleteFood()">
+<input type="button" class="btn btn-info" value="kustuta" onclick="deleteFood()">
 
+<h2>Otsi rasvasisalduse vahemiku jargi </h2>
+<label>Miinimum</label>
+<input id="findFoodFatMin" type="number"><br>
+<label>Maksimum</label>
+<input id="findFoodFatMax" type="number"><br>
+<input type="button" class="btn btn-info" value="Otsi" onclick="findFoodByFat()">
 
 <script>
     var connection = new XMLHttpRequest();
@@ -48,8 +57,8 @@
     function addNewFood() {
         var nimetus = document.getElementById("nimetus").value;
         var valgud = document.getElementById("valgud").value;
-		var rasvad = document.getElementById("rasvad").value;
-		var susivesikud = document.getElementById("susivesikud").value;
+		    var rasvad = document.getElementById("rasvad").value;
+		    var susivesikud = document.getElementById("susivesikud").value;
         connection.open("GET", "/lisa?nimetus=" + nimetus + "&valgud=" +
             valgud + "&rasvad=" + rasvad + "&susivesikud=" + susivesikud, true);
         connection.send();
@@ -63,6 +72,13 @@
 
     function foodData() {
         document.getElementById("foodList").innerHTML = connection.responseText;
+    }
+
+    function findFoodByFat(){
+      var findFoodFatMin = document.getElementById("findFoodFatMin").value;
+      var findFoodFatMax = document.getElementById("findFoodFatMax").value;
+      connection.open("GET","/rasvaotsing?rasvadmin=" + findFoodFatMin + "&rasvadmax=" + findFoodFatMax, true);
+      connection.send();
     }
 
 </script>

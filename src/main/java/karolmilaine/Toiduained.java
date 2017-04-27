@@ -16,7 +16,11 @@ public class Toiduained{
 	Integer valgud;
 	Integer rasvad;
 	Integer susivesikud;
-	
+
+	public String protsendiError(){
+       String error = "Valkude, rasvade ja susivesikute protsent ei tohi kokku uletada 100%";
+       return error;
+   }
 	@Override
     public String toString() {
         return "<tr><td>" + id + "</td><td>" + nimetus + "</td><td>" + valgud + "</td><td>" + rasvad +
