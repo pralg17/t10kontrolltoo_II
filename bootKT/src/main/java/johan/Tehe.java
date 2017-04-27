@@ -1,9 +1,9 @@
 public class Tehe implements Funktsioon{
-	int x;
-	public Tehe(int x){
+	double x;
+	public Tehe(double x){
 		this.x=x;
 	}
-	public int f(int kordaja){
+	public double f(double kordaja){
 		return kordaja*x;
 	}
 }

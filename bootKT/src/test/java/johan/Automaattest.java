@@ -13,8 +13,26 @@ public class Automaattest {
 	@Test
 	public void tehteTest(){
 		Rakendus r=new Rakendus();
-		Funktsioon v=new Tehe(4);
-		Assert.assertEquals(16.0,r.arvuta(v,4),0.01);
+		Funktsioon v=new Tehe(2);
+		Assert.assertEquals(6.0,r.arvuta(v,3));
+
+	}
+	
+	@Test
+	public void tehteTest2(){
+		Rakendus r=new Rakendus();
+		Funktsioon t=new Tehe2(4, 2);
+		Assert.assertEquals(12.0,r.arvuta(t,3));
+	}
+	@Test
+	public void massiiviTest(){
+		Rakendus r=new Rakendus();
+		Funktsioon x1=new Tehe(3);
+		Funktsioon x2=new Tehe(5);
+		Funktsioon x3=new Tehe(7);
+		Assert.assertEquals(6.0,r.arvuta(x1,3));
+		Assert.assertEquals(10.0,r.arvuta(x2,3));
+		Assert.assertEquals(14.0,r.arvuta(x3,3));
 	}
 
 }

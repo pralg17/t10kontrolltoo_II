@@ -1,3 +1,3 @@
 public interface Funktsioon{
-	public int f(int kordaja);
+	public double f(double kordaja);
 }
