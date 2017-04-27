@@ -15,6 +15,7 @@ var notifikatsiooniNupp = ''
 
 app.listen(3000, ()=>{
   console.log('Server jookseb pordil 3000')
+  testid()
 })
 
 class Alleel {
@@ -42,6 +43,8 @@ class Geen {
         	} else {
         		this.toevaartus = false
         	}
+        } else {
+        	break
         }
         geenid.push(this);
         // console.log(this)
@@ -152,18 +155,42 @@ const kuvaNimed = (liida)=>{
 		}
 		return list
 	} else {
-		return ""
+		return ''
 	}
 }
 
 const kuiOnKaks = (liida)=>{
 	let pikkus = liida.length
 	if(pikkus == 2){
-		return `<a href="http://46.101.173.169:3000/yhendageenid/${liida[0]}/${liida[1]}">Ühenda</a>`
+		let geenid = liida[0] + "/" + liida[1]
+		return `<a href='http://46.101.173.169:3000/valitudgeenid'>Ühenda</a>`
 	} else {
-		return ""
+		return ''
 	}
 }
+
+app.get('/valitudgeenid', (req, res)=>{
+	if(liida.length == 2){
+
+		let vastus = yhenda(liida[0].nimetus, liida[1].nimetus)
+
+		res.send(`
+			<a href="http://46.101.173.169:3000/">Avaleht</a>
+			${vastus}
+			`)
+	} else {
+		res.send(`
+		<a href="http://46.101.173.169:3000/">Avaleht</a>
+		<h3>Midagi läks valesti... :(</h3>
+			`)
+	}
+})
+
+app.get('/tyhjendaliida', (req, res)=>{
+	liida = []
+	notifikatsiooniNupp = "Tühjendatud!"
+	res.redirect('back')
+})
 
 app.get('/', (req, res)=>{
   res.send(`
@@ -174,6 +201,10 @@ app.get('/', (req, res)=>{
   	${kuvaNimed(liida)}
   	<br>
   	${kuiOnKaks(liida)}
+  	<br>
+  	${notifikatsiooniNupp}
+  	<br>
+  	<a href="http://46.101.173.169:3000/tyhjendaliida">Tühjenda</a>
   	<br>
   	<h3 style="text-decoration: underline">Alleelid:</h3>
   	${alleelid}
@@ -259,7 +290,7 @@ app.get('/lapsegeen/:nimetus/:vanem1/:vanem2', (req, res)=>{
 	`)
 })
 
-app.get('/testid', (req, res)=>{
+const testid = ()=>{
 
 	let uus_alleel = new Alleel("Test_alleel", true)
 	let a = uus_alleel.toevaartus
@@ -290,9 +321,8 @@ app.get('/testid', (req, res)=>{
 		}
 	}
 
-	res.send("tulemused kajastuvad konsoolis!")
 
-})
+}
 
 
 //req.params.nimi
