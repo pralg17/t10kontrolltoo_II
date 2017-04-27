@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="style.css">
+		<script>	
+			console.log("pressed");
+			var connection = new XMLHttpRequest();
+			connection.onreadystatechange=dataReceived;
+			function saveRiver(){
+				var rivername = document.getElementById("rivername").value;
+				var riverflow = document.getElementById("riverflow").value;
+				var riverlenght = document.getElementById("riverlenght").value;
+				var whereflows = document.getElementById("whereflows").value;
+				var riverflowskm = document.getElementById("riverflowskm").value;
+				if(whereflows==""){
+					whereflows="merre";
+				}
+				connection.open("GET", "/lisa?rivername="+rivername+"&riverflow="+riverflow+"&whereflows="+whereflows+"&riverflowskm="+riverflowskm+"&riverlenght="+riverlenght, true);
+				connection.send();
+				erase();
+			}
+			function dataReceived(){
+			
+				document.getElementById("answer").innerHTML=connection.responseText;
+				
+			
+			}
+			function erase(){
+				document.getElementById("rivername").value = "";
+				document.getElementById("riverflow").value = "";
+				document.getElementById("riverlenght").value = "";
+				document.getElementById("whereflows").value = "";
+				document.getElementById("riverflowskm").value= "";
+			}
+			var connection2 = new XMLHttpRequest();
+			connection2.onreadystatechange=dataReceived2;
+			function findRiver(){
+				var rivername2 = document.getElementById("rivername2").value;
+				connection2.open("GET", "/leia?rivername="+rivername2, true);
+				connection2.send();
+				erase();
+			}
+			function dataReceived2(){
+				document.getElementById("answer2").innerHTML=connection2.responseText;
+			}
+
+			var connection3 = new XMLHttpRequest();
+			connection3.onreadystatechange=dataReceived3;
+			function findRiverkm(){
+				var rivernamekm = document.getElementById("rivernamekm").value;
+				var riverflowskm = document.getElementById("riverflowskms").value;
+				connection3.open("GET", "/leia2?whereflows="+rivernamekm+"&riverflowskms="+riverflowskm, true);
+				connection3.send();
+			}
+			function dataReceived3(){
+				document.getElementById("answer3").innerHTML=connection3.responseText;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="flex">
+			<div class="addRiver">
+				<h2>Lisamine</h2>
+				Nimi<br><input id="rivername"></input><br>
+				Vooluhulk<br><input id="riverflow"></input><br>
+				Pikkus<br><input id="riverlenght"></input><br>
+				Kuhu suundub<br><input id="whereflows"></input><br>
+				Mitmendal km suundub<br><input id="riverflowskm"></input><br>
+				<button type="button" onclick="saveRiver()">Salvesta</button><br>
+				<div id="answer"></div>
+			</div>
+			<div class="findRiver">
+				<h2>Otsimine</h2>
+				Nimi<br><input id="rivername2"></input><br>
+				<button type="button" onclick="findRiver()">Otsi</button><br>
+				<div id="answer2"></div>
+			</div>
+			<div class="findRiverkm">
+				<h2>Otsimine km</h2>
+				Nimi<br><input id="rivernamekm"></input><br>
+				KM<br><input id="riverflowskms"></input><br>
+				<button type="button" onclick="findRiverkm()">Otsi</button><br>
+				<div id="answer3"></div>
+			</div>
+			
+		</div>
+	</body>
+</html>
