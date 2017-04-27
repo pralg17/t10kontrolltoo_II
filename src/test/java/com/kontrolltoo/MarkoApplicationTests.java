@@ -33,6 +33,8 @@ public class MarkoApplicationTests {
 	@Test
     public void checkNameOrder(){assertEquals(r.vesinikfloriid.getName(), "HF");}
 
+    @Test
+    public void checkSubstanceMass(){assertEquals(r.vesiniknitraat.giveMass(), 74.0, 0.0001);}
 
 
 }

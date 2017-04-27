@@ -2,8 +2,7 @@ package com.kontrolltoo;
 
 
 public interface Aine {
-	int giveMass();
-	boolean isValid();
+	double giveMass();
 	String getName();
-
+	int getCharge();
 }
