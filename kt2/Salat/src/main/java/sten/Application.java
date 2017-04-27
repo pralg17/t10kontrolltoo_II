@@ -32,7 +32,7 @@ public class Application{
 		StringBuffer sb = new StringBuffer();
 		for(Salat nimetus1: salat){
 			sb.append("<p>");
-			sb.append("Aine " + nimetus + "Rasvakogus" + nimetus1.rasvakogus.toString());
+			sb.append("Aine " + nimetus + " Rasvakogus" + nimetus1.rasvakogus.toString());
 			sb.append("</p>");
 		}
 		return sb.toString();
