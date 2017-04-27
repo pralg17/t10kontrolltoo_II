@@ -9,6 +9,6 @@ import javax.transaction.Transactional;
  */
 
 @Transactional
-public interface AlleleDao extends CrudRepository<Allele, String> {
+public interface AlleleDao extends CrudRepository<Allele, Integer> {
 }
 

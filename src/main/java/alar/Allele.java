@@ -1,5 +1,6 @@
 package alar;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,13 +12,24 @@ import javax.persistence.Table;
 @Table(name="allele")
 public class Allele {
     @Id
+    @GeneratedValue
+    private Integer id;
     private String name;
     private Boolean positive;
+
+    public Allele(){
+        //EMPTY
+    }
 
     public Allele(String name, Boolean positive){
         setName(name);
         setPositive(positive);
     }
+
+    public Integer getId() {return id;}
+
+    public void setId(Integer id) {this.id = id;}
+
     String getName() {
         return name;
     }
@@ -36,5 +48,13 @@ public class Allele {
 
     public void Allele(Boolean positive) {
         this.positive = positive;
+    }
+
+    public String positiveToString(){
+        if(positive){
+            return "Positive";
+        } else {
+            return "Negative";
+        }
     }
 }

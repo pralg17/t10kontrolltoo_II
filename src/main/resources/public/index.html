@@ -2,38 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Allele and gene database</title>
+    <script>
+        var connection = new XMLHttpRequest();
+
+
+        function displayAllAlleles() {
+            connection.open("GET", "/listAllAlleles", false);
+            connection.send(null);
+            document.getElementById("alleleTable").innerHTML = connection.responseText;
+
+        }
+
+        function displayAllGenes(){
+            connection.open("GET", "/listAllGenes", false);
+            connection.send(null);
+            document.getElementById("geneTable").innerHTML = connection.responseText;
+
+        }
+
+        function findGene(){
+            connection.open("GET", "/searchGene?name=" + document.getElementById("searchGeneField").value, false);
+            connection.send(null);
+            document.getElementById("geneTable").innerHTML = connection.responseText;
+        }
+
+        function createGene(){
+
+        }
+
+        function createAllele(){
+            var createAlleleName = document.getElementById("createAlleleName").value;
+            var createAllelePositivity = document.getElementById("createAllelePositivity");
+
+            connection.open("GET", "/createallele?name=" + createAlleleName + "&positive=" + createAllelePositivity.options[createAllelePositivity.selectedIndex].value, false);
+            connection.send(null);
+            document.getElementById("createAlleleResponse").innerHTML = connection.responseText;
+            displayAllAlleles();
+        }
+
+        function generateGene(){
+            var createGeneName = document.getElementById("createGeneName").value;
+            var createGeneAl1 = document.getElementById("createGeneAllele1ID").value;
+            var createGeneAl2 = document.getElementById("createGeneAllele2ID").value;
+            connection.open("GET", "/creategene?name=" + createGeneName + "&allele1=" + createGeneAl1 + "&allele2=" + createGeneAl2, false);
+            connection.send(null);
+            document.getElementById("createGeneResponse").innerHTML = connection.responseText;
+            displayAllGenes();
+        }
+
+        function loadTables(){
+            displayAllAlleles();
+            displayAllGenes();
+        }
+        setTimeout(function(){
+            displayAllGenes();
+            displayAllAlleles();
+
+        }, 1000);
+
+    </script>
 </head>
-<body>
+<body">
 <h1>Alleles</h1>
-<div id="alleleList" class="table">
+<table class="table">
     <!--(ALLELE.NAME, POSITIVITY)/-->
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Positive</td>
+        </tr>
+    </thead>
+    <tbody id="alleleTable">
 
-</div>
+    </tbody>
+</table>
 <h1>Genes</h1>
-<div id="geneList">
     <!--(GENEID, ALLELE1.NAME, ALLELE2.NAME, POSITIVITY)/-->
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Allele 1</td>
+            <td>Allele 2</td>
+            <td>Positivity</td>
+    </tr>
+    </thead>
+    <tbody id="geneTable" >
 
-</div>
+    </tbody>
+</table>
 <h2>Search gene</h2>
 <div id="searchGene">
-        <input type="text" name="searchGeneField" placeholder=""/>
-        <a href="#">Search</a>
+        <input type="text" id="searchGeneField" placeholder="Gene name"/>
+        <input type="button" value="Search" onclick="findGene()"/>
+        <input type="button" value="Reset" onclick="displayAllGenes()"/>
 </div>
 <h1>Create new allele</h1>
 <div id="createAllele">
     <!--(ALLELE.NAME, POSITIVITY)/-->
+    <div id="createAlleleForm">
+        <input type="text" id="createAlleleName" placeholder="Allele name"/>
+        <select id="createAllelePositivity">
+            <option value="True">Select positivity</option>
+            <option value="True">Positive</option>
+            <option value="False">Negative</option>
+        </select>
+        <input type="button" value="Search" onclick="createAllele()"/>
+    </div>
+    <div id="createAlleleResponse">
 
+    </div>
 </div>
+
 <h1>Create new gene (Allele + Allele)</h1>
 <div id="createGene">
     <!--(GENE, ALLELE1.NAME, ALLELE2.NAME, POSITIVITY)/-->
+    <div id="createGeneForm">
+        <input type="text" id="createGeneName" placeholder="Gene name"/>
+        <input type="text" id="createGeneAllele1ID" placeholder="Gene name"/>
+        <input type="text" id="createGeneAllele2ID" placeholder="Gene name"/>
+        <input type="button" value="Create new gene" onclick="createGene()"/>
+    </div>
+    <div id="createGeneResponse">
 
+    </div>
 </div>
+
 <h1>Generate new gene from parents (Gene + Gene)</h1>
 <div id="generateGene">
     <!--(GENE1.RANDOMALLELE, GENE2.RANDOMALLELE)/-->
 
+    <div id="generateGeneForm">
+        <input type="text" id="generateGeneField" placeholder="Gene name"/>
+        <input type="button" value="Search" onclick="generateGene()"/>
+    </div>
+    <div id="generateGeneResponse">
+
+    </div>
 </div>
 </body>
 </html>

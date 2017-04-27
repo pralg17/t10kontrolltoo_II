@@ -1,7 +1,5 @@
 package alar;
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Random;
 
 /**
@@ -10,10 +8,20 @@ import java.util.Random;
 @Entity
 @Table(name="gene")
 public class Gene {
+
     @Id
+    @GeneratedValue
+    private Integer id;
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "allele1")
     private Allele allele1;
+
+    @ManyToOne
+    @JoinColumn(name = "allele2")
     private Allele allele2;
+
     private Boolean positive;
 
     String getName() {return name;}
@@ -40,14 +48,25 @@ public class Gene {
         this.positive = (allele1.getPositive() || allele2.getPositive());
     }
 
-    Gene(Allele allele1, Allele allele2) {
-        this.allele1 = allele1;
-        this.allele2 = allele2;
-        setPositive();
+    public Integer getId() {return id;}
+    public void setId(Integer id) {this.id = id;}
+
+    Gene(){
+        //EMPTY
+    }
+
+    Gene(String name, Allele allele1, Allele allele2) {
+        if(allele1.getName().equals(allele2.getName())){
+            this.name = name;
+            this.allele1 = allele1;
+            this.allele2 = allele2;
+            setPositive();
+        }
     }
 
     Gene(Gene gene1, Gene gene2){
         if(gene1.getName().equals(gene2.getName())){
+            this.name = gene1.getName();
             this.allele1 = gene1.getRandomAllele();
             this.allele2 = gene2.getRandomAllele();
             setPositive();
@@ -67,7 +86,12 @@ public class Gene {
         return getAllele2();
     }
 
-
-
+    public String positiveToString(){
+        if(positive){
+            return "Positive";
+        } else {
+            return "Negative";
+        }
+    }
 
 }
