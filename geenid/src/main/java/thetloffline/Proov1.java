@@ -10,6 +10,6 @@ public class Proov1 {
 		s6bralik.alleel1 = reesus1;
 		s6bralik.alleel2 = reesus2;
 
-		System.out.println("Alleeli nimetus on: " + reesus1.nimetus + " ja v22rtus on: " + reesus2.v22rtus);
+		//System.out.println("Alleeli nimetus on: " + reesus1.nimetus + " ja v22rtus on: " + reesus2.v22rtus);
 	}
 }

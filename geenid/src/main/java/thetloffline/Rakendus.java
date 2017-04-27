@@ -12,39 +12,48 @@ import javax.servlet.http.HttpSession;
 public class Rakendus {
 
 	@Autowired
+	private GeenideHaldur geenideHaldur;
+
+	@Autowired
 	HttpSession sessioon;
 	
 	//Joogivaat vaat = new Joogivaat();
 
 	@RequestMapping("/Lisa")
-	public String(String alleeliNimetus, String emaAlleel1, String emaAlleel2, String isaAlleel1, String isaAlleel2) {
-		Geen uusGeen = new Geen();
-		uusGeen.alleeliNimetus1 = new Allel (alleeliNimetus, emaAlleel1.equals("true"));
-		uusGeen.alleeliNimetus2 = new Allel (alleeliNimetus, emaAlleel2.equals("true"));
-		uusGeen.alleeliNimetus1 = new Allel (alleeliNimetus, isaAlleel1.equals("true"));
-		uusGeen.alleeliNimetus2 = new Allel (alleeliNimetus, isaAlleel2.equals("true"));
+	public String lapseGeen(String alleeliNimetus, String emaAlleel1, String emaAlleel2, String isaAlleel1, String isaAlleel2) {
+		Geen uusGeenEma = new Geen();
+		uusGeenEma.alleel1 = new Alleel(alleeliNimetus, emaAlleel1.equals("true"));
+		uusGeenEma.alleel2 = new Alleel(alleeliNimetus, emaAlleel2.equals("true"));
+		Geen uusGeenIsa = new Geen();
+		uusGeenIsa.alleel1 = new Alleel(alleeliNimetus, isaAlleel1.equals("true"));
+		uusGeenIsa.alleel2 = new Alleel(alleeliNimetus, isaAlleel2.equals("true"));
+		GeenidDB salvestaGeen = new GeenidDB();
+		salvestaGeen.lapseAlleel1 = uusGeenEma.getRandomAlleel();
+		salvestaGeen.lapseAlleel2 = uusGeenIsa.getRandomAlleel();
+		geenideHaldur.save(salvestaGeen);
+
 	}
 
-	@RequestMapping("/uusgeen")
+	@RequestMapping("/loouusgeen")
 	public String newGene() {
 		Geen emaReesus = new Geen();
-		emaReesus.reesus1 = new Alleel("reesus", false);
-		emaReesus.reesus2 = new Alleel("reesus", true);
+		emaReesus.alleel1 = new Alleel("reesus", false);
+		emaReesus.alleel2 = new Alleel("reesus", true);
 		
 		Geen isaReesus = new Geen();
-		isaReesus.reesus1 = new Alleel("reesus", false);
-		isaReesus.reesus2 = new Alleel("reesus", true);
+		isaReesus.alleel1 = new Alleel("reesus", false);
+		isaReesus.alleel2 = new Alleel("reesus", true);
 
 		Geen lapseReesus = new Geen();
-		lapseReesus.reesus1 = new emaReesus.getRandomAlleel();
-		lapseReesus.reesus2 = new isaReesus.getRandomAlleel(); // reesus 1 v 2?
+		lapseReesus.alleel1 = emaReesus.getRandomAlleel();
+		lapseReesus.alleel2 = isaReesus.getRandomAlleel(); // reesus 1 v 2?
 
+		return "";
 	}
-
 
 	public static void main(String[] args) {
 		System.getProperties().put("server.port", 4200);
-		SpringApplication.run(Rakendus.class);
+		SpringApplication.run(Rakendus.class, args); //, args ?
 
 	}
 }
