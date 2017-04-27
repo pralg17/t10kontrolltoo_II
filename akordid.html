@@ -6,6 +6,9 @@
     /* {
       display: grid;
     }*/
+    * {
+      font-family: Roboto, "Open Sans", "Noto Sans", sans-serif;
+    }
     body {
       max-width: 720px;
       margin: 5%;
@@ -18,11 +21,18 @@
       border: 2px green solid;
       border-radius: 2%;
     }
+    input {
+      width: 100%;
+      margin: 3px;
+      padding: 7px;
+
+    }
     a {
       border: 1px darkgray solid;
       padding: 7px;
       margin: 3px;
       display: inline-block;
+      width: 100%;
     }
 
     a:hover {
@@ -45,7 +55,10 @@
     <form id="song">
       <input id="songAddChord" type="text" name="songchord" placeholder="Akordi nimetus, näiteks 'C'">
       <a onClick="Song.addChord()">Lisa akord laulu</a>
-      <br><a onclick="Song.removeLastChord()">Eemalda viimane akord laulust</a>
+      <a onclick="Song.removeLastChord()">Eemalda viimane akord laulust</a>
+      <h3>Näita akordide noote</h3>
+      <a onClick="Song.showChordConstructs('notes')">noodinimedega</a>
+      <a onClick="Song.showChordConstructs('numbers')">numbritega</a>
     </form>
     <p id="songoutput" class="output">(siia ilmub laul)</p>
     <br>
