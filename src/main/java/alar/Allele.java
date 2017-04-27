@@ -26,7 +26,7 @@ public class Allele {
         setPositive(positive);
     }
 
-    public Integer getId() {return id;}
+    Integer getId() {return id;}
 
     public void setId(Integer id) {this.id = id;}
 
@@ -34,7 +34,7 @@ public class Allele {
         return name;
     }
 
-    void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
@@ -46,11 +46,7 @@ public class Allele {
         this.positive = positive;
     }
 
-    public void Allele(Boolean positive) {
-        this.positive = positive;
-    }
-
-    public String positiveToString(){
+    String positiveToString(){
         if(positive){
             return "Positive";
         } else {
