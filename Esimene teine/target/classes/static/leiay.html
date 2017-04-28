@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Arvutame y vastavalt x v‰‰rtustele</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = getData;
+        function getData() {
+            document.getElementById("igrek").innerHTML = xhr.responseText;
+        }
+        function onPress() {
+            var url = "/arvutay?iksMin=" + document.getElementById("iksMin").value + "&iksMax=" +
+				document.getElementById("iksMax").value + "&kordaja=" +
+                document.getElementById("kordaja").value + "&vabaliige=" +
+                document.getElementById("vabaliige").value;
+            xhr.open("GET", url, true);
+            xhr.send();
+			
+            
+        }
+    </script>
+</head>
+<body>
+
+<h2>Minimaalne X</h2>
+<input type="text" id="iksMin">
+<h2>Maksimaalne X</h2>
+<input type="text" id="iksMax">
+<h2>Kordaja</h2>
+<input type="text" id="kordaja">
+<h2>Vabaliige</h2>
+<input type="text" id="vabaliige">
+<input type="button" value="Leia Y" onclick="onPress()"/>
+
+<br>
+<div id="igrek"></div>
+
+
+</body>
+</html>

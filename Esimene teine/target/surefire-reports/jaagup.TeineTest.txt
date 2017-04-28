@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: jaagup.TeineTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.013 sec <<< FAILURE! - in jaagup.TeineTest
+TestYks(jaagup.TeineTest)  Time elapsed: 0.011 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at jaagup.TeineTest.TestYks(TeineTest.java:21)
+
