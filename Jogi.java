@@ -7,20 +7,10 @@ public class Jogi{
 	double lqpmatus; // jqgi lqpmatu koht, kuhu ta suudub
 	
 	public Jogi(String nimetus, double pikkus, double vool, String sihtkoht, double lqpmatus){
-		
-		if( nimetus == null || nimetus.length() == 0 ) {
-			throw new RuntimeException("Joe nimetus puudub!");
-		}
-		
 		this.nimetus = nimetus;
 		this.pikkus = pikkus;
 		this.vool = vool;
 		this.sihtkoht = sihtkoht;
 		this.lqpmatus = lqpmatus;
-		
-		if(sihtkoht == null || sihtkoht.length() == 0 ){
-			throw new RuntimeException("Joe on saabuv mere otsa");
-		}
-	
 	}
 }
