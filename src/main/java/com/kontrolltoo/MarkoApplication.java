@@ -11,26 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication(exclude = SessionAutoConfiguration.class)
 @RestController
 public class MarkoApplication {
-	public IoonRakendamine vesinik = new IoonRakendamine("H", 12.0, 1);
-    public IoonRakendamine nitraat = new IoonRakendamine("NO3", 62, -1 );
-	public IoonRakendamine kloor = new IoonRakendamine("Cl", 8 , -3);
-    public IoonRakendamine floriid = new IoonRakendamine("F", 17,-1);
+    public IoonRakendamine vesinik = new IoonRakendamine("H", 12.0, 1);
+    public IoonRakendamine nitraat = new IoonRakendamine("(NO3)", 62, -1);
+    public IoonRakendamine kloor = new IoonRakendamine("Cl", 8, -3);
+    public IoonRakendamine floriid = new IoonRakendamine("F", 17, -1);
 
     public Aine vesinikfloriid = new AineRakendamine(floriid, vesinik);
     public Aine vesiniknitraat = new AineRakendamine(vesinik, nitraat);
 
+    public AineRakendamine_massiiv massiv = new AineRakendamine_massiiv(vesinik,vesinik, vesinik, kloor);
 
     @RequestMapping("/failure")
-    public String makeFailure(){
-        try{
+    public String makeFailure() {
+        try {
             Aine failure = new AineRakendamine(vesinik, kloor);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return "You don goofed";
         }
-
         return null;
     }
 
+    @RequestMapping("ionarray")
+    public String ionname(){
+        return massiv.getName();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MarkoApplication.class, args);

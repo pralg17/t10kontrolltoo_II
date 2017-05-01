@@ -2,20 +2,20 @@ package com.kontrolltoo;
 
 public class IoonRakendamine implements Ioon {
 
-    String nimetus;
-    double aatom_mass;
-    int laeng;
+    String name;
+    double atom_mass;
+    int charge;
 
-    public IoonRakendamine(String nimetus, double aatom_mass, int laeng) {
-        this.nimetus = nimetus;
-        this.aatom_mass = aatom_mass;
-        this.laeng = laeng;
+    public IoonRakendamine(String name, double atom_mass, int charge) {
+        this.name = name;
+        this.atom_mass = atom_mass;
+        this.charge = charge;
     }
 
     public boolean isPositive() {
-        if (laeng > 0) {
+        if (charge > 0) {
             return true;
-        } else if (laeng < 0) {
+        } else if (charge < 0) {
             return false;
         }else{
             return false;
@@ -23,6 +23,14 @@ public class IoonRakendamine implements Ioon {
     }
 
     public int getCharge() {
-        return laeng;
+        return charge;
+    }
+
+    public double getMass() {
+        return atom_mass;
+    }
+
+    public String getName(){
+        return name;
     }
 }

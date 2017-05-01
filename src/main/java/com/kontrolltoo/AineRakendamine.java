@@ -2,8 +2,8 @@ package com.kontrolltoo;
 
 public class AineRakendamine implements Aine{
 
-    private IoonRakendamine pos;
-    private IoonRakendamine neg;
+    public IoonRakendamine pos;
+    public IoonRakendamine neg;
 	private String name;
     private double mass;
     private int charge;
@@ -18,18 +18,14 @@ public class AineRakendamine implements Aine{
 			this.neg = ioon1;
 		}
 
-        this.charge = pos.laeng + neg.laeng;
-		if (charge != 0 && pos.laeng > neg.laeng && neg.laeng < pos.laeng  ) {
-			throw new RuntimeException("Laengud ei ole null.");
+        this.charge = pos.charge + neg.charge;
+		if (charge != 0 && pos.charge > neg.charge && neg.charge < pos.charge  ) {
+			throw new RuntimeException("Laeng ei ole null.");
 		}
 
-		this.name = pos.nimetus + neg.nimetus;
-        this.mass = pos.aatom_mass + neg.aatom_mass;
+		this.name = pos.name + neg.name;
+        this.mass = pos.atom_mass + neg.atom_mass;
 	}
-
-
-
-
 
 	@Override
 	public double giveMass() {
@@ -42,7 +38,7 @@ public class AineRakendamine implements Aine{
 		return name;
 	}
 
-
+	@Override
     public int getCharge() {
         return charge;
     }
