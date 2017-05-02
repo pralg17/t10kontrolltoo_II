@@ -116,12 +116,18 @@ public class Application {
     public String generateGene(String g1, String g2){
         Gene gene1 = findGene(Integer.parseInt(g1));
         Gene gene2 = findGene(Integer.parseInt(g2));
+        String response = null;
         if(gene1 != null && gene2 != null){
             Allele allele1 = gene1.getRandomAllele();
             Allele allele2 = gene2.getRandomAllele();
-            String response = createGene(gene1.getName(), allele1.getId().toString(), allele2.getId().toString());
-            return response + "\n Alleles: " + allele1.getName() + "(" + allele1.positiveToString() + "), " +
-                    allele2.getName() + "(" + allele2.positiveToString() + ")\n";
+            if(gene1.getName().equals(gene2.getName())){
+                geneDao.save(new Gene(gene1.getName(), allele1, allele2));
+                response = "New gene created!" + "\n Alleles: " + allele1.getName() + "(" + allele1.positiveToString() + "), " +
+                        allele2.getName() + "(" + allele2.positiveToString() + ")\n";
+            } else {
+                response = "To generate a new gene from parents, the gene names must be the same. \n";
+            }
+            return response;
         } else {
             return "Genes with the ID " + g1 + " and/or " + g2 + " does not exist.";
         }
@@ -150,7 +156,7 @@ public class Application {
         return stringBuffer.toString();
     }
 
-    public Allele findAllele(Integer id){
+    private Allele findAllele(Integer id){
         Allele result = null;
         for(Allele item: alleleDao.findAll()){
             if(item.getId().equals(id)){
@@ -160,7 +166,7 @@ public class Application {
         return result;
     }
 
-    public Gene findGene(Integer id){
+    private Gene findGene(Integer id){
         Gene result = null;
         for(Gene item: geneDao.findAll()){
             if(item.getId().equals(id)){
