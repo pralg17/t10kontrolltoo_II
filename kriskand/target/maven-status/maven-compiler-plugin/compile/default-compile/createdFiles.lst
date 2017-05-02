@@ -1,5 +1,4 @@
-Kasutus.class
-kriskand/Rakendus.class
-Liides.class
-Yvaartus.class
-Funktsioon.class
+baas/kriskand/Arvutus.class
+baas/kriskand/Rakendus.class
+baas/kriskand/Arvutus2.class
+baas/kriskand/Funktsioon.class
