@@ -16,7 +16,7 @@ public static void main(String[] argumendid) throws IOException{
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
 		Jogi jogi1 = new Jogi("Suur-jogi", 500, 800, null, 200);
-		Jogi jogi2 = new Jogi("Vaike-jogi", 120, 400, "Suur-jogi", 0);
+		Jogi jogi2 = new Jogi("Vaike-jogi", 120, 400, "Suur-jogi", 150);
 		
 		/*
 		System.out.println("Esimene joi on " + jogi1.nimetus);
@@ -44,3 +44,11 @@ public static void main(String[] argumendid) throws IOException{
 	
 	}	
 }
+
+/* Kui 1:
+Jogi voolab labi Suur-jogi ning labi Vaike-jogi.
+Kui 2:
+Jogi voolab labi Vaike-jogi ning labi Suur-jogi.
+Kui 3:
+
+*/

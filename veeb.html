@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    
+	<title>Jogi</title>
+	
+	</head>
+	
+	<body>
+	
+		<h2>Valige, kust tahate alustada:</h2>
+		
+		<p>Kui te soovite alustada teed merre Suur-joest, sisestage 1.</p>
+		<p>Kui te soovite alustada teed merre Vaike-joest, sisestage 2.</p>
+		<p>Kui te soovite alustada teed kohast, kus yks joe vallab teisele, sisestage 3.</p>
+
+		<input id="sihtkoht" type="text"></input>
+		<input type="button" value="vali" onclick="valisihtkoht()">
+		
+		<h2>Arvuta km etteantud kohast mereni:</h2>
+		
+		<input type="button" value="arvuta" onclick="valisihtkoht()">
+	
+	</body>
+	
+	
+	
+	
+	<script>
+	
+	function valisihtkoht(){
+	var sihtkoht = document.getElementById("sihtkoht").value;
+	var jogi1 = ["Suur-jogi", 500, 800, null, 200];
+	var jogi2 = ["Vaike-jogi", 120, 400, "Suur-jogi", 150];
+	
+	if( sihtkoht == 1){
+		alert("Jogi voolab labi " + jogi1[0] + " ning labi " + jogi2[0] + ".");
+	
+	} else if ( sihtkoht == 2) {
+		alert("Jogi voolab labi " + jogi2[0] + " ning labi " + jogi1[0] + ".");
+	
+	} else if( sihtkoht == 3){
+		alert("Jogi voolab labi " + jogi1[0] + ".")
+	
+	} else {
+		alert("Ei leia sellist numbri!")
+		}
+	}
+	
+	</script>
+	
+</html>

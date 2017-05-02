@@ -12,5 +12,6 @@ public class Jogi{
 		this.vool = vool;
 		this.sihtkoht = sihtkoht;
 		this.lqpmatus = lqpmatus;
+		
 	}
 }
