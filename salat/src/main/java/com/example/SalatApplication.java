@@ -26,6 +26,33 @@ public class SalatApplication {
         return kartul.nimetus + hapukoor.nimetus + vorst.nimetus;
     }
 
+    @RequestMapping("/kartuliSalat")
+    public String kartuliSalat(double soov) {
+        Toiduaine kartul = new Toiduaine(1, "kartul", 23, 34, 43);
+        Toiduaine hapukoor = new Toiduaine(2, "hapukoor", 16, 28, 22);
+        Toiduaine vorst = new Toiduaine(3, "vorst", 43, 10, 20);
+
+        ToiduKomponendid kartulKomponent = new ToiduKomponendid();
+        kartulKomponent.toiduaine = kartul;
+        kartulKomponent.kogus = 100;
+
+        ToiduKomponendid hapukoorKomponent = new ToiduKomponendid();
+        hapukoorKomponent.toiduaine = hapukoor;
+        hapukoorKomponent.kogus = 30;
+
+        ToiduKomponendid vorstKomponent = new ToiduKomponendid();
+        vorstKomponent.toiduaine = vorst;
+        vorstKomponent.kogus = 50;
+
+        Toit kartuliSalat = new Toit();
+        kartuliSalat.nimetus = "kartuli salat";
+        kartuliSalat.toiduKomponendidList.add(kartulKomponent);
+        kartuliSalat.toiduKomponendidList.add(hapukoorKomponent);
+        kartuliSalat.toiduKomponendidList.add(vorstKomponent);
+
+        return kartuliSalat.vajalikKogus(soov);
+    }
+
     @RequestMapping("/toit")
     public String toiduKomponent() {
         Toiduaine kartul = new Toiduaine(1, "kartul", 23, 34, 43);
@@ -60,7 +87,7 @@ public class SalatApplication {
         sb.append(kartuliSalat.nimetus);
         */
 
-            return kartuliSalat.toString();
+        return kartuliSalat.toString();
     }
 
     @RequestMapping("/listall")

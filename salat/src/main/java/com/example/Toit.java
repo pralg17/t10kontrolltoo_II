@@ -26,20 +26,29 @@ public class Toit {
         double sysivesikud = sysivesikudFrom * kogus;
         return sysivesikud;
     }
-/*
-    public double vajalikKogus(double soov, Toit  toit){
-        int komponentideKogus = toiduKomponendidList.size();
-        double suhtArv = soov / komponentideKogus;
 
+    public String vajalikKogus(double soov) {
         double kogused = 0;
-
-        for(int i = 0; i < toiduKomponendidList.size(); i++){
-            kogused = kogused + toiduKomponendidList.get(i).kogus;
+        if (toiduKomponendidList.size() > 0) {
+            for (int i = 0; i < toiduKomponendidList.size(); i++) {
+                kogused = kogused + toiduKomponendidList.get(i).kogus;
+            }
         }
 
-
+        double vajadus = soov / kogused;
+        StringBuffer sb = new StringBuffer();
+        if (toiduKomponendidList.size() > 0) {
+            for (int i = 0; i < toiduKomponendidList.size(); i++) {
+                sb.append("<tr><td> " + toiduKomponendidList.get(i).toiduaine.nimetus + "</td>");
+                sb.append("<td> " + (vajadus * toiduKomponendidList.get(i).kogus) + "</td></tr>");
+            }
+            String thead = "<tr><th>Toiduaine nimetus </th><th>kogus </th></tr>";
+            return thead + "<br>" + sb.toString();
+        } else {
+            return "Tyhi";
+        }
     }
-*/
+
 
     @Override
     public String toString() {
