@@ -17,18 +17,18 @@
 				//Taktide arv laulus
 				var numberOfTacts = document.getElementById("numberOfTacts").value;
 
+				var tacts = "";
+
 				//Lisan laulu taktidele akordid
 				for(var i=1;i<=numberOfTacts;i++) {
 
-					console.log(i);
 					var chordSymbol = document.getElementById("tact"+i).value;
-					console.log(chordSymbol);
-					xhr.open("GET", "/add_tact?chordSymbol="+chordSymbol, true);
-					xhr.send();
-					console.log("/add_tact?chordSymbol="+chordSymbol);
-					window.setTimeout(function(){}, 500);
-					
+					tacts += chordSymbol;
+					tacts += " ";
 				}
+
+				xhr.open("GET", "/add_tact?chordSymbol="+tacts, true);
+				xhr.send();
 
 				//Nupp, mis kuvab noodid tähtnimetustena
 				var entry = document.createElement("div");
@@ -61,9 +61,11 @@
 				//Teen vastuse ala tühjaks
 				document.getElementById("song").innerHTML = "";
 
-				//Kustutan juba olemasolevad kastid
+				//Kustutan juba olemasolevad kastid ja nupud
 				var existingFields = document.getElementById("tacts");
 				existingFields.innerHTML = "";
+				var existingButtons = document.getElementById("genNotes");
+				existingButtons.innerHTML = "";
 
 				//Tekitan kastida, 1 iga takti jaoks
 				var numberOfTacts = document.getElementById("numberOfTacts").value;

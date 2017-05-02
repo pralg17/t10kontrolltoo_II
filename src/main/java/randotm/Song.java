@@ -18,6 +18,10 @@ public class Song {
 		}
 	}
 
+	public Triad getTact(int tactNumber) {
+		return tacts[tactNumber];
+	}
+
 	public String writeOutTones() {
 		String output = "";
 		for(int i=0;i<tacts.length;i++) {

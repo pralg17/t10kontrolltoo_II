@@ -22,39 +22,20 @@ public class Chords {
 		session.putValue("song", s);
 	}
 
-	@RequestMapping("/add_tact/t")
-	public void addTactToSongByTone(int chordTone) {
-		Song s = (Song)session.getValue("song");
-		Triad chord = new Triad(chordTone);
-		s.addTact(chord);
-		session.putValue("song", s);
-	}
-
 	@RequestMapping("/add_tact")
 	public void addTactToSongByLetter(String chordSymbol) {
 		Song s = (Song)session.getValue("song");
-		/*
+		String[] chordSymbols = chordSymbol.split("\\s+");
 		for(int i=0;i<chordSymbols.length;i++) {
-			if(chordSymbols[i] == Integer.parseInt(chordSymbols[i])) {
-				int chordSymbol = Integer.parseInt(chordSymbols[i]);
-				Triad chord = new Triad(chordSymbol);
+			try {
+				Triad chord = new Triad(Integer.parseInt(chordSymbols[i]));
 				s.addTact(chord);
 				session.putValue("song", s);
-			} else {
-				String chordSymbol = chordSymbols[i];
-				Triad chord = new Triad(chordSymbol);
+			} catch(Exception e) {
+				Triad chord = new Triad(chordSymbols[i]);
 				s.addTact(chord);
 				session.putValue("song", s);
 			}
-			*/
-		try {
-			Triad chord = new Triad(Integer.parseInt(chordSymbol));
-			s.addTact(chord);
-			session.putValue("song", s);
-		} catch(Exception e) {
-			Triad chord = new Triad(chordSymbol);
-			s.addTact(chord);
-			session.putValue("song", s);
 		}
 	}
 
