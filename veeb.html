@@ -20,6 +20,7 @@
 		<h2>Arvuta km etteantud kohast mereni:</h2>
 		<p>Kui te soovite arvutada km teed merre Suur-joest, sisestage 1.</p>
 		<p>Kui te soovite arvutada km teed merre Vaike-joes, sisestage 2.</p>
+		<p>Kui te soovite arvutada km teed merre kus yks joe vallab teisele, sisestage 3.</p>
 		
 		<input id="kmkaugus" type="text"></input>
 		<input type="button" value="arvuta" onclick="arvutakm()">
@@ -57,16 +58,20 @@
 	
 	if(kmkaugus == 1){
 		var vastus1 = 0;
-		vastus1 = ((jogi2[2] * 100) / jogi2[1]) - ((jogi1[2] * 100) / jogi1[1])
-		alert(vastus1 + "km mereni");
+		vastus1 = jogi1[1] - jogi2[1]
+		alert(vastus1 + " km mereni.");
 		
 	} else if (kmkaugus == 2){
 		var vastus2 = 0;
-		vastus2 = ((jogi2[2] * 100) / jogi2[1]) + ((jogi1[2] * 100) / jogi1[1]);
-		alert(vastus2 + "km merreni");
+		vastus2 = jogi2[1] + jogi1[1]
+		alert(vastus2 + " km merreni.");
+	} else if (kmkaugus == 3) {
+		var vastus3 = jogi1[1]
+		alert(vastus3 + " km mereni.");
+	
 	} else {
-		alert("Ei leia sellist tahte!");
-		} 
+		alert("Ei leia sellist tahe!");
+	} 
 	
 	}
 	
