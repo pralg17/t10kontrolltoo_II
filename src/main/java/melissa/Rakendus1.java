@@ -24,10 +24,7 @@ public class Rakendus1{
         m3.laeng=(-2);
         m3.i=i2;
 
-		aine a1=new aine("Lämmastikhape", 1);
-	
 		
-       
 
         System.out.println(i1.nimetus+" ioonmass on "+(m1.aatommass*m1.kogus)+" ja laeng: "+m1.laeng);
 	

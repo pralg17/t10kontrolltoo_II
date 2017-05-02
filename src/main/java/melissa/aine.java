@@ -1,16 +1,21 @@
 package melissa;
 
 public class aine{
-	String nimetus;
+	String animetus;
 	double molekulmass;
-	public aine(String nimetus, double molekulmass){
-		if(nimetus==null || nimetus.length()==0){
-			throw new RuntimeException("Nimetus puudub");
+	double laengkokku;
+	aine a;
+	aine kokku(aine ioon){
+		if(ioon.i!=null){return null;}{ 
+		if(ioon.laeng<=laengkokku){
+			laengkokku-=ioon.laeng;
+			ioon.i=i; 
+			return ioon;
 		}
-		this.nimetus=nimetus; 
-		this.molekulmass=molekulmass;
+		return null; 
 	}
-	public aine(String nimetus, double molekulmass){
-		this(nimetus, molekulmass);
-	}
+	
+ }
 }
+	
+	
