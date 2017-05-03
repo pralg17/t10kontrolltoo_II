@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Salat</title>
+		<script>
+			var connection = new XMLHttpRequest();
+			connection.onreadystatechange=andmedsaabusid;
+			function Otsing(){
+				var r_otsing1 = document.getElementById("r_min").value;
+				var r_otsing2 = document.getElementById("r_max").value;
+				connection.open("GET", "/Otsi_rasv?rasv_min="+r_otsing1+"&rasv_max="+r_otsing2, true);
+				connection.send();
+			}
+			
+			function KustutaId(){
+				var k_id = document.getElementById("aine_id").value;
+				connection.open("GET", "/eemalda_toiduaine?id="+k_id, true);
+				connection.send();
+			}
+			
+			function N2ita(){
+				connection.open("GET", "/n2itak6ik", true);
+				connection.send();
+			}
+			
+			function andmedsaabusid(){
+				document.getElementById("Toiduained").innerHTML = connection.responseText;
+			}
+			
+			function Lisa(){
+				var toiduainenimetus = document.getElementById("t_nimetus").value;
+				var toiduainevalgud = document.getElementById("t_valgud").value;
+				var toiduainerasvad = document.getElementById("t_rasvad").value;
+				var toiduainesysivesikud = document.getElementById("t_sysivesikud").value;
+				connection.open("GET", "/lisa_toiduaine?nimetus="+toiduainenimetus+"&valkude_p="+toiduainevalgud+"&rasvade_p="+toiduainerasvad+"&sysivesikute_p="+toiduainesysivesikud, true);
+				connection.send();
+			}
+			
+			function Valmista(){
+				var soovitud_kogus = document.getElementById("kogus").value;
+				connection.open("GET", "/KartuliSalat?soovitudKogus="+soovitud_kogus, true);
+				connection.send();
+			}
+		</script>
+	</head>
+	<body>
+		<h2>Toiduained</h2><br>
+		<div id="Toiduained" ></div>
+		
+		<h2>Lisa Toidaineid</h2>
+		<label>Nimetus</label><br>
+		<input type="text" id="t_nimetus" /><br>
+		<label>Valgud</label><br>
+		<input type="text" id="t_valgud" /><br>
+		<label>Rasvad</label><br>
+		<input type="text" id="t_rasvad" /><br>
+		<label>Sysivesikud</label><br>
+		<input type="text" id="t_sysivesikud" /><br>
+		
+		<input type="button" value="Lisa" onclick="Lisa()" />
+		
+		<h2>Kustuta Toiduaineid</h2>
+		<label>Toiduaine ID</label><br>
+		<input type="text" id="aine_id" /><br>
+		
+		<input type="button" value="Kustuta" onclick="KustutaId()" />
+		
+		<h2>Otsi Toidaineid</h2>
+		<label>Rasvade Miinimum</label><br>
+		<input type="text" id="r_min"><br>
+		<label>Rasvade Maksimum</label><br>
+		<input type="text" id="r_max"><br>
+		
+		<input type="button" value="Otsi" onclick="Otsing()" />
+		
+		<h2>N2ita Toiduaineid</h2>
+		<input type="button" value="N2ita" onclick="N2ita()" />
+		
+		<h2>Palju tahate salatit valmistada?</h2>
+		<label>Soovitud kogus</label><br>
+		<input type="text" id="kogus"><br>
+		
+		<input type="button" value="Valmista" onclick="Valmista()" />
+		
+	</body>	
+</html>
