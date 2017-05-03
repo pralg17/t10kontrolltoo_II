@@ -17,7 +17,7 @@ public class Proov1{
 		
 		System.out.println(k1.rasvakogus());
 		System.out.println(k2.rasvakogus());
-		System.out.println(toit1.rasvakogus);
+		System.out.println(toit1.valkudekogus);
 		
 	}
 	

@@ -1,21 +1,37 @@
 package Chris;
 
-public class Toit{
+import java.util.ArrayList;
+import java.util.List;
+ 
 
-	String nimetus;
-	Toidukomponent k;
-	double rasvakogus;
-	double valkudekogus;
-	double sysivesikutekogus;
+public class Toit{
 	
-	public Toit(String nimetus, Toidukomponent k){
+	String nimetus;
+	double vajalik_kogus;
+	
+	public ArrayList<Toidukomponent> Toidukomponendid = new ArrayList<Toidukomponent>();
+	
+	public String kogusSalatiks(double soovitudKogus){
 		
-		this.nimetus = nimetus;
-		this.k = k;
-		this.rasvakogus = k.rasvakogus();
-		this.valkudekogus = k.valkudekogus();
-		this.sysivesikutekogus = k.sysivesikutekogus();
+		double kogused = 0;
+		
+		for(int i = 0; i < Toidukomponendid.size(); i++){
+			kogused = kogused + Toidukomponendid.get(i).kogus;
+		}
+		
+		vajalik_kogus = soovitudKogus / kogused;
+		
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i = 0; i < Toidukomponendid.size(); i++){
+			sb.append("<tr><td>" + Toidukomponendid.get(i).t.nimetus + " "  + "</td>");
+			sb.append("<td>" + (vajalik_kogus * Toidukomponendid.get(i).kogus) + "</td></tr><br>");
+		}
+		
+		String table_head = "<tr><th>Toiduaine</th><th> Kogus</th></tr><br>";
+		return table_head + sb;
+		
 		
 	}
-}
 	
+}
