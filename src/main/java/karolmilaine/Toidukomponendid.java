@@ -2,9 +2,9 @@ package karolmilaine;
 
 public class Toidukomponendid{
     Toiduained t;
-    double kogus;
+    public double kogus;
 
-    double rasvakogus(){
+    public double rasvakogus(){
       if(t==null){return kogus;}
       return(kogus*t.rasvad)/100;
     }

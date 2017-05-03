@@ -10,12 +10,12 @@ import javax.persistence.Table;
 @Table(name = "toiduained")
 public class Toiduained{
 	@Id
-    @GeneratedValue
-	Integer id;
-	String nimetus;
-	Integer valgud;
-	Integer rasvad;
-	Integer susivesikud;
+  @GeneratedValue
+	public Integer id;
+	public String nimetus;
+	public double valgud;
+	public double rasvad;
+	public double susivesikud;
 
 	public String protsendiError(){
        String error = "Valkude, rasvade ja susivesikute protsent ei tohi kokku uletada 100%";

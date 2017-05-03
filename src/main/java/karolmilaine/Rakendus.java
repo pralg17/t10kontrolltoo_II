@@ -17,6 +17,82 @@ public class Rakendus{
         this.toiduainedDao = toiduainedDao;
     }
 
+		@RequestMapping("/toiduaine")
+		public String toiduaine(){
+			Toiduained t1= new Toiduained();
+			Toiduained t2= new Toiduained();
+			Toiduained t3= new Toiduained();
+
+			return t1.nimetus + t2.nimetus + t3.nimetus;
+		}
+
+		@RequestMapping("/kartulisalat")
+		public String kartulisalat(double soov){
+			Toiduained t1= new Toiduained();
+			Toiduained t2= new Toiduained();
+			Toiduained t3= new Toiduained();
+
+			Toidukomponendid k1 = new Toidukomponendid();
+			k1.t = t1;
+			k1.kogus = 30;
+
+			Toidukomponendid k2 = new Toidukomponendid();
+			k2.t = t2;
+			k2.kogus = 50;
+
+			Toidukomponendid k3 = new Toidukomponendid();
+			k3.t = t3;
+			k3.kogus = 70;
+
+			Toit kartulisalat = new Toit();
+			kartulisalat.nimetus = "kartulisalat";
+			kartulisalat.toidukomponendidList.add(k1);
+			kartulisalat.toidukomponendidList.add(k2);
+			kartulisalat.toidukomponendidList.add(k3);
+
+			return kartulisalat.vajalikKogus(soov);
+
+		}
+
+		@RequestMapping("/toit")
+		public String toidukomponent(){
+			Toiduained t1= new Toiduained();
+			Toiduained t2= new Toiduained();
+			Toiduained t3= new Toiduained();
+
+			Toidukomponendid k1 = new Toidukomponendid();
+			k1.t = t1;
+			k1.kogus = 30;
+
+			Toidukomponendid k2 = new Toidukomponendid();
+			k2.t = t2;
+			k2.kogus = 50;
+
+			Toidukomponendid k3 = new Toidukomponendid();
+			k3.t = t3;
+			k3.kogus = 70;
+
+			Toit kartulisalat = new Toit();
+			kartulisalat.nimetus = "kartulisalat";
+			kartulisalat.toidukomponendidList.add(k1);
+			kartulisalat.toidukomponendidList.add(k2);
+			kartulisalat.toidukomponendidList.add(k3);
+
+			System.out.println("Kartuli kogus grammides on: "+(k1.kogus));
+			System.out.println("Hapukoore kogus grammides on: "+(k2.kogus));
+			System.out.println("Vorsti kogus grammides on: "+(k3.kogus));
+
+			System.out.println();
+
+			System.out.println("Rasvakogus kartulis on: "+(k1.rasvakogus()));
+			System.out.println("Rasvakogus hapukoores on: "+(k2.rasvakogus()));
+			System.out.println("Rasvakogus vorstis on: "+(k3.rasvakogus()));
+
+
+			return kartulisalat.toString();
+
+		}
+
 	@RequestMapping("/listall")
     String listall(String nimetus) {
         StringBuffer sb = new StringBuffer();
@@ -63,43 +139,14 @@ public class Rakendus{
 			String thead = "<tr><th>Id</th><th>Nimetus</th><th>Valgud</th><th>Rasvad</th><th>Susivesikud</th></tr>";
          return thead + sb.toString();
 		}
-		
+
 
     public static void main(String[] args) {
         System.getProperties().put("server.port", 1234);
         SpringApplication.run(Rakendus.class, args);
     }
 
-    /*public static void main(String[] arg){
-        Toiduained t1= new Toiduained("kartul", 1.71, 0, 20.1);
-        Toiduained t2= new Toiduained("hapukoor", 2.8, 20, 3.2);
-        Toiduained t3= new Toiduained("vorst", 12, 19, 4);
 
-		Toidukomponendid k1 = new Toidukomponendid();
-		k1.t = t1;
-		k1.kogus = 100;
-
-		Toidukomponendid k2 = new Toidukomponendid();
-		k2.t = t2;
-		k2.kogus = 30;
-
-		Toidukomponendid k3 = new Toidukomponendid();
-		k3.t = t3;
-		k3.kogus = 50;
-
-		System.out.println("Kartuli kogus grammides on: "+(k1.kogus));
-		System.out.println("Hapukoore kogus grammides on: "+(k2.kogus));
-		System.out.println("Vorsti kogus grammides on: "+(k3.kogus));
-
-    System.out.println();
-
-    System.out.println("Rasvakogus kartulis on: "+(k1.rasvakogus()));
-    System.out.println("Rasvakogus hapukoores on: "+(k2.rasvakogus()));
-    System.out.println("Rasvakogus vorstis on: "+(k3.rasvakogus()));
-
-
-
-    }*/
 
 //scl enable rh-maven33 bash
 //mvn package
