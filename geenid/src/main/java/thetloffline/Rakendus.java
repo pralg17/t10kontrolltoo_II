@@ -11,49 +11,87 @@ import javax.servlet.http.HttpSession;
 @SpringBootApplication
 public class Rakendus {
 
+   // @Autowired
+   //  public Rakendus(GeenDao geenDao) {
+   //      this.geenDao = geenDao;
+   //  }
+
 	@Autowired
-	private GeenideHaldur geenideHaldur;
+	private GeenDao geenDao;
 
 	@Autowired
 	HttpSession sessioon;
-	
-	//Joogivaat vaat = new Joogivaat();
 
 	@RequestMapping("/Lisa")
 	public String lapseGeen(String alleeliNimetus, String emaAlleel1, String emaAlleel2, String isaAlleel1, String isaAlleel2) {
-		Geen uusGeenEma = new Geen();
-		uusGeenEma.alleel1 = new Alleel(alleeliNimetus, emaAlleel1.equals("true"));
-		uusGeenEma.alleel2 = new Alleel(alleeliNimetus, emaAlleel2.equals("true"));
-		Geen uusGeenIsa = new Geen();
-		uusGeenIsa.alleel1 = new Alleel(alleeliNimetus, isaAlleel1.equals("true"));
-		uusGeenIsa.alleel2 = new Alleel(alleeliNimetus, isaAlleel2.equals("true"));
-		GeenidDB salvestaGeen = new GeenidDB();
-		salvestaGeen.lapseAlleel1 = uusGeenEma.getRandomAlleel();
-		salvestaGeen.lapseAlleel2 = uusGeenIsa.getRandomAlleel();
-		geenideHaldur.save(salvestaGeen);
+		Alleel ema1 = new Alleel(alleeliNimetus, emaAlleel1.equals("true"));
+		Alleel ema2 = new Alleel(alleeliNimetus, emaAlleel1.equals("true"));
+		Geen uusGeenEma = new Geen(ema1, ema2);
 
+		Alleel isa1 = new Alleel(alleeliNimetus, isaAlleel1.equals("true"));
+		Alleel isa2 = new Alleel(alleeliNimetus, isaAlleel1.equals("true"));
+		Geen uusGeenIsa = new Geen(isa1, isa2);
+
+		GeenDB salvestaGeen = new GeenDB();
+		salvestaGeen.alleeliNimetus = alleeliNimetus;
+		salvestaGeen.lapseAlleel1 = String.valueOf(uusGeenEma.getRandomAlleel().v22rtus);
+		salvestaGeen.lapseAlleel2 = String.valueOf(uusGeenIsa.getRandomAlleel().v22rtus);
+
+		geenDao.save(salvestaGeen);
+		return "Loodi ja salvestati " + salvestaGeen.toString();
 	}
+
+	@RequestMapping("/Otsi")
+	public String otsiGeeni(String otsiAlleeliNimetust) {
+        StringBuilder sb = new StringBuilder();
+        for (GeenDB geen : geenDao.findAll()) {
+        	if (geen.alleeliNimetus.equals(otsiAlleeliNimetust)) {
+        		sb.append("<tr><td>").
+        		append(geen.id).
+        		append("</td><td>").
+        		append(geen.alleeliNimetus).
+        		append("</td><td>").
+        		append(geen.lapseAlleel1).
+        		append("</td><td>").
+        		append(geen.lapseAlleel2).
+        		append("</td><td>").
+        		append("<input type='checkbox' /></td>").
+        		append("</td></tr>");
+        	}
+        }
+        return sb.toString();
+	}
+
 
 	@RequestMapping("/loouusgeen")
 	public String newGene() {
-		Geen emaReesus = new Geen();
-		emaReesus.alleel1 = new Alleel("reesus", false);
-		emaReesus.alleel2 = new Alleel("reesus", true);
+		Geen emaReesus = new Geen(
+			new Alleel("reesus", false), 
+			new Alleel("reesus", true)
+		);
+		//emaReesus.alleel1 = new Alleel("reesus", false);
+		//emaReesus.alleel2 = new Alleel("reesus", true);
 		
-		Geen isaReesus = new Geen();
-		isaReesus.alleel1 = new Alleel("reesus", false);
-		isaReesus.alleel2 = new Alleel("reesus", true);
+		Geen isaReesus = new Geen(
+			new Alleel("reesus", false), 
+			new Alleel("reesus", true)
+		);
+		//isaReesus.alleel1 = new Alleel("reesus", false);
+		//isaReesus.alleel2 = new Alleel("reesus", true);
 
-		Geen lapseReesus = new Geen();
-		lapseReesus.alleel1 = emaReesus.getRandomAlleel();
-		lapseReesus.alleel2 = isaReesus.getRandomAlleel(); // reesus 1 v 2?
+		Geen lapseReesus = new Geen(
+			emaReesus.getRandomAlleel(), 
+			isaReesus.getRandomAlleel()
+		);
+		//lapseReesus.alleel1 = emaReesus.getRandomAlleel();
+		//lapseReesus.alleel2 = isaReesus.getRandomAlleel(); // reesus 1 v 2?
 
 		return "";
 	}
 
 	public static void main(String[] args) {
 		System.getProperties().put("server.port", 4200);
-		SpringApplication.run(Rakendus.class, args); //, args ?
+		SpringApplication.run(Rakendus.class, args);
 
 	}
 }

@@ -1,16 +1,21 @@
 package thetloffline;
 
 public class Geen {
-	Alleel alleel1; //kas teha massiiv, et saaks lihtsamini juhusliku alleeli tagastada
-	Alleel alleel2;
-	boolean avaldub;
+	private Alleel alleel1;
+	private Alleel alleel2;
 
-	boolean geeniV22rtus(Alleel alleel1, Alleel alleel2) {//kui mõlemad on false -> false
+	public Geen(Alleel alleel1, Alleel alleel2) {
+		this.alleel1 = alleel1;
+		this.alleel2 = alleel2;
+	}
+
+	public Geen(){}
+
+	boolean geeniV22rtus() {
 		if (alleel1.v22rtus == false && alleel2.v22rtus == false) {
-			return avaldub == false;
-		}
-		else {
-			return avaldub == true;
+			return false;
+		} else {
+			return true;
 		}
 	}
 

@@ -18,18 +18,18 @@ public class RakendusTests {
 
 	@Test
 	public void geeniAvaldumineTrueTest() {
-		Geen s6bralik = new Geen();
-		Alleel reesus1 = new Alleel("reesus", false);
-		Alleel reesus2 = new Alleel("reesus", true);
-		assertEquals(s6bralik.avaldub == true, s6bralik.geeniV22rtus(reesus1, reesus2));
+		Geen s6bralik = new Geen(new Alleel("reesus", false), new Alleel("reesus", true));
+		//Alleel reesus1 = new Alleel("reesus", false);
+		//Alleel reesus2 = new Alleel("reesus", true);
+		assertEquals(true, s6bralik.geeniV22rtus());
 	}
 
 	@Test
 	public void geeniAvaldumineFalseTest() {
-		Geen s6bralik2 = new Geen();
-		Alleel reesus1 = new Alleel("reesus", false);
-		Alleel reesus2 = new Alleel("reesus", false);
-		assertEquals(s6bralik2.avaldub == false, s6bralik2.geeniV22rtus(reesus1, reesus2));
+		Geen s6bralik2 = new Geen(new Alleel("reesus", false), new Alleel("reesus", false));
+		//Alleel reesus1 = new Alleel("reesus", false);
+		//Alleel reesus2 = new Alleel("reesus", false);
+		assertEquals(false, s6bralik2.geeniV22rtus());
 	}
 	
 }
