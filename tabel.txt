@@ -1,0 +1,12 @@
+CREATE TABLE `toiduained` (
+    `nimetus` VARCHAR(255) NOT NULL ,
+    `valgud` INT NOT NULL ,
+	`rasvad` INT NOT NULL ,
+	`susivesikud` INT NOT NULL ,
+    ENGINE = InnoDB;
+
+INSERT INTO `toiduained` (`nimetus`, `valgud`, `rasvad`, `susivesikud`) VALUES
+    ('hapukoor', '2.8', '20','3.2'),
+
+ALTER TABLE `toiduained` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD UNIQUE (`id`);
+ALTER TABLE `toiduained` DROP PRIMARY KEY, ADD PRIMARY KEY(`id`);
