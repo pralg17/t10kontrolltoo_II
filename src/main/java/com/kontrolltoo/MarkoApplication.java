@@ -17,8 +17,9 @@ import java.util.ArrayList;
 public class MarkoApplication{
 
 	@Autowired
-	HttpSession sessioon;
-	ArrayList<String> nameArray = new ArrayList<>();
+	private HttpSession sessioon;
+	private ArrayList<String> nameArray = new ArrayList<>();
+	private ArrayList<IoonRakendamine> helper = new ArrayList<IoonRakendamine>();
 
 	public IoonRakendamine vesinik = new IoonRakendamine("H", 12.0, 1);
 	public IoonRakendamine nitraat = new IoonRakendamine("(NO3)", 62, -1);
@@ -51,6 +52,30 @@ public class MarkoApplication{
 		nameArray.add(name);
 	}
 
+	@RequestMapping ("createsubstance")
+	public String makeSubstance() {
+		for( String ion_name : nameArray ){
+			helper.add((IoonRakendamine) sessioon.getAttribute(ion_name));
+		}
+
+		try{
+
+			if(helper.isEmpty() && nameArray.isEmpty()){
+				return "Lisage ioonid";
+			}else{
+				AineRakendamine_massiiv aine = new AineRakendamine_massiiv(helper.toArray(new IoonRakendamine[0]));
+				helper.clear();
+				nameArray.clear();
+				return aine.getName() + " aatommassiga: " + aine.giveMass();
+			}
+
+
+		}catch ( RuntimeException e ){
+			helper.clear();
+			nameArray.clear();
+			return "Ainete laeng ei ole 0. Alustage algusest.";
+		}
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(MarkoApplication.class, args);

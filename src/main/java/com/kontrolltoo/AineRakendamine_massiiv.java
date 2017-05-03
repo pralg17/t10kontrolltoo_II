@@ -20,7 +20,7 @@ class AineRakendamine_massiiv implements Aine {
 
         for (IoonRakendamine ioon : ioonid) this.charge += ioon.getCharge();
         if (this.charge != 0) {
-            throw new RuntimeException("This violates the law.");
+            throw new RuntimeException("This violates the law." + this.getCharge());
         }
 
 
