@@ -1,20 +1,30 @@
-public class Toiduained{
-	
-	String nimetus;
-	double valkudeProtsent;
-	double rasvadeProtsent;
-	double sysivesikuteProtsent;
-	
-	public Toiduained(String nimetus, double valkudeProtsent, double rasvadeProtsent, double sysivesikuteProtsent){
-		
-		if(valkudeProtsent+rasvadeProtsent+sysivesikuteProtsent>100){
-			throw new RuntimeException("Ei saa uletada 100%");
-		}
+package henri;
 
-		this.nimetus=nimetus; 
-		this.valkudeProtsent=valkudeProtsent;
-		this.rasvadeProtsent=rasvadeProtsent;
-		this.sysivesikuteProtsent=sysivesikuteProtsent;
-	}
+import javax.persistence.*;
+
+@Table(name="Toiduained")
+@Entity
+public class Toiduained{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public Long id;
+	public String nimetus;
+	public Integer kogus;
+	public Integer sysivesikuprotsent;
+	public Integer valguprotsent;
+	public Integer rasvakogus;
 	
+	
+	public Toiduained(){
+ 		
+ 	}
+
+ 	public Toiduained(String nimetus, Integer kogus, Integer rasvakogus, Integer sysivesikuprotsent, Integer valguprotsent){
+		this.nimetus = nimetus;
+		this.kogus = kogus;
+		this.rasvakogus = rasvakogus;
+		this.sysivesikuprotsent = sysivesikuprotsent;
+		this.valguprotsent = valguprotsent;
+	}	
+ 	
 }
