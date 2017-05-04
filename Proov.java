@@ -1,20 +1,51 @@
+import java.util.*;
+
+
 public class Proov{
 	public static void main(String[] args) {
-		Jogi j1=new Jogi("Pirakas", 150, 32, null, 0, 0);
-		Jogi j2=new Jogi("Keskmik", 88, 15, j1.getNimi(), 18, j1.pikkusKokku());
-		Jogi j3=new Jogi("Pisike", 12, 3, j2.getNimi(), 67, j2.pikkusKokku());
-		Jogi j4=new Jogi("Keskpärane", 57, 12, j1.getNimi(), 112, j1.pikkusKokku());
-		Jogi j5=new Jogi("Nääps", 8, 1, j3.getNimi(), 3, j3.pikkusKokku());
+		
+		int j;
+		double kogupikkus;
+		
+		ArrayList<Jogi> jogi= new ArrayList<>();
+		
+		jogi.add(new Jogi("Pirakas", 150, 32, "", 0));
+		jogi.add(new Jogi("Keskmik", 88, 15, "Pirakas", 18));
+		jogi.add(new Jogi("Pisike", 12, 3, "Keskmik", 67));
+		jogi.add(new Jogi("Keskpärane", 57, 12, "Pirakas", 112));
+		jogi.add(new Jogi("Nääps", 8, 1, "Pisike", 3));
 		
 		
 		System.out.println("\n");
- 		System.out.println(j1);
-		System.out.println(j2);
-		System.out.println(j3);
-		System.out.println(j4);
-		System.out.println(j5);
+		
+		for(int i=0; i<jogi.size(); i++) {
+			if( jogi.get(i).siht == "" ) {
+				System.out.println("Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + "km ja see suubub otse merre");
+			} else {
+				System.out.println("Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + "km ja see suubub merre läbi jõgede: ");
+
+				j=i;
+				kogupikkus = jogi.get(i).pikk;
+				while (jogi.get(j).siht != "") {
+					System.out.println(jogi.get(j).siht);
+					
+					
+					for(int k=0; k<jogi.size(); k++) {
+						if (jogi.get(k).nim == jogi.get(j).siht) {
+							j=k;
+							kogupikkus += jogi.get(k).pikk;
+						}
+					}
+					
+				}
+				
+				System.out.println("ning see teeb kogupikkuseks " + kogupikkus + "km.");
+			}
+			System.out.println();
+		}
+		
 		System.out.println("\n");
 
+		
 	}
 }
-
