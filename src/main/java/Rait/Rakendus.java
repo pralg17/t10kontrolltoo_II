@@ -23,6 +23,7 @@ public class Rakendus {
 		int j, i;
 		double kogupikkus;
 		String sisend;
+
 		
 		ArrayList<Jogi> jogi= new ArrayList<Jogi>();
 		
@@ -50,7 +51,7 @@ public class Rakendus {
 				kogupikkus = jogi.get(i).pikk;
 				StringBuffer sb=new StringBuffer();
 				while (jogi.get(j).siht != "") {
-					sb.append(jogi.get(j).siht);
+					sb.append(jogi.get(j).siht + " ");
 					
 					
 					for(int k=0; k<jogi.size(); k++) {
@@ -62,7 +63,7 @@ public class Rakendus {
 					
 				}
 				
-				return "Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + " km ja see suubub merre läbi jõgede: " + sb + " ning kogupikkuseks tuleb " + kogupikkus;
+				return "Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + " km ja see suubub merre läbi jõgede: " + sb.toString() + " ning kogupikkuseks tuleb " + kogupikkus;
 			}
 		} else {
 			return "Sellise jõe kohta info puudub.";
