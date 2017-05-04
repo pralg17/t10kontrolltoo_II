@@ -19,6 +19,7 @@
   "homepage": "https://github.com/pralg17/t10kontrolltoo_II#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
     "express": "^4.15.2",
     "firebase-admin": "^4.2.1",
     "mongoose": "^4.9.5"

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+            <input id="nimi"type="text" name="nimi" placeholder="nimi">
+            <input type="number" placeholder="valgud" id="valgud">
+            <input type="number" placeholder="rasvad" id="rasvad">
+            <input type="number" placeholder="sysivesikud" id="sysivesikud">
+            <input type="submit" id="submit">
+    </div>
+    <h3>Kustutamine</h3>
+        <input type="text" id="deletebyname" placeholder="kustutatava objekti nimi">
+        <button id="delete">Kustuta</button>
+    <h3>Kõik tulemused:</h3>
+    <button id="refresh">Uuenda:</button>
+    <div id="k6ik"></div>
+</body>
+<script>
+    window.onload = function(){
+        //Lühendan d.getElementById:
+        const grab = id => document.getElementById(id)
+        //Targetin välju..
+        let nimi=grab("nimi"), valgud=grab("valgud"),
+            rasvad=grab('rasvad'), sysivesikud=grab('sysivesikud')
+        //...Ja kuulan submit-i    
+        grab('submit').addEventListener("click",function(event){
+            event.preventDefault()
+            fetch('http://localhost:3456/uus', {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nimi: nimi.value,
+                    valgud: valgud.value,
+                    rasvad: rasvad.value,
+                    sysivesikud: sysivesikud.value
+                })
+            })
+                .then(res => res.json())
+                .then(data => {alert('lisatud!')})
+                .catch(e => alert(e))
+            }
+        )
+        grab('refresh').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch('http://localhost:3456/')
+                .then(res => res.json())
+                .then(data => grab('k6ik').innerHTML = JSON.stringify(data))
+        })
+        grab("delete").addEventListener("click", function(e){
+            e.preventDefault();
+            fetch("http://localhost:3456", {
+                body: JSON.stringify({nimi: grab("deletebyname").value}),
+                method: "delete",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(res => res.json())
+                .then(data => alert(data))
+                .catch(e => alert(e))
+        })
+        
+    }
+
+</script>
+</html>

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+
 const Toiduaine = class {
     constructor(nimi,valgud,rasvad,süsivesikud) {
         if(nimi) {
@@ -35,7 +36,6 @@ const Toiduaine = class {
             }
         }
     }
-    
 }
 
 const Toidukomponent = class extends Toiduaine {
