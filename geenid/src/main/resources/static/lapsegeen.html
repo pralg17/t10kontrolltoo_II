@@ -39,6 +39,24 @@
 
 		}
 
+		function valiGeen() {
+			var alleel = [];
+			var alleeliNimetus = document.getElementById("alleeliNimetusId").innerHTML;
+			var tsykkel = document.getElementById("leitud").innerHTML;
+			for (i = 0; i < tsykkel; i++) {
+				if(document.getElementById("valik"+i).checked) {
+					alleel.push(document.getElementById("lapseAlleel1Id"+i).innerHTML)
+					alleel.push(document.getElementById("lapseAlleel2Id"+i).innerHTML)
+				}
+			}
+
+			connection.open("GET", "/Lisa?alleeliNimetus=" + alleeliNimetus + "&emaAlleel1=" + alleel[0] + "&emaAlleel2=" + alleel[1]+ "&isaAlleel1=" + alleel[2] + "&isaAlleel2=" + alleel[3], false);
+			connection.send(null);
+
+			document.getElementById("valitudLapseGeen").innerHTML = connection.responseText;
+			
+		}
+
 	</script>
 	<link rel="stylesheet" href="">
 </head>
@@ -63,6 +81,7 @@
 	</div>
 
 	<div id="lapseGeen">Lapse geeni väljastamise koht</div>
+	<div id="valitudLapseGeen">Lapse geeni väljastamise koht</div>
 	<!-- <div id="otsitudGeen">Otsitud geeni väljastamise koht</div> -->
 	<table class = "geenitabel">
 		<thead>
@@ -75,6 +94,8 @@
 			</tr>
 		</thead>
 		<tbody id = "otsitudGeen"></tbody>
+		<input type="button" value="lisa valik" onclick="valiGeen()">	
+
 
 </body>
 </html>

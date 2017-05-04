@@ -44,24 +44,28 @@ public class Rakendus {
 	@RequestMapping("/Otsi")
 	public String otsiGeeni(String otsiAlleeliNimetust) {
         StringBuilder sb = new StringBuilder();
+        int i = 0;
         for (GeenDB geen : geenDao.findAll()) {
         	if (geen.alleeliNimetus.equals(otsiAlleeliNimetust)) {
         		sb.append("<tr><td>").
         		append(geen.id).
         		append("</td><td>").
-        		append(geen.alleeliNimetus).
+        		append("<div id = 'alleeliNimetusId'>"+geen.alleeliNimetus+"</div>").
         		append("</td><td>").
-        		append(geen.lapseAlleel1).
+        		append("<div id = 'lapseAlleel1Id"+i+"'>"+geen.lapseAlleel1+"</div>").
         		append("</td><td>").
-        		append(geen.lapseAlleel2).
+        		append("<div id = 'lapseAlleel2Id"+i+"'>"+geen.lapseAlleel2+"</div>").
         		append("</td><td>").
-        		append("<input type='checkbox' /></td>").
+        		append("<input type='checkbox' id = 'valik"+i+"'/></td>").
         		append("</td></tr>");
+        		i++;
         	}
         }
+        sb.append("<tr><td>Leitud geenide arv: <div id = 'leitud' >"+(i)+"</div></td></tr>");
         return sb.toString();
 	}
 
+	
 
 	@RequestMapping("/loouusgeen")
 	public String newGene() {
