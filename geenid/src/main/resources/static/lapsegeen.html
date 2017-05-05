@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Geenide leht</title>
+	<script>
+		var connection = new XMLHttpRequest();
+		//connection.onreadystatechange = kuvaUusGeen;
+		
+/*		function ajut() {
+			connection.open("GET", "/uusgeen", true);
+			connection.send();
+		}
+*/
+	/*	function kuvaUusGeen() {
+			document.getElementById("lapseGeen").innerHTML = connection.responseText;
+		}
+		
+		function kuvaLeitudGeen() {
+			 document.getElementById("otsitudGeen").innerHTML = connection.responseText;
+		}*/
+
+		function lisaUusGeen() {
+			//alleeliNimetus = document.getElementById("alleeliNimetus").value;
+			//emaAlleel1 = document.getElementById("emaAlleel1").value;
+			//emaAlleel2 = document.getElementById("emaAlleel2").value;
+			//isaAlleel1 = document.getElementById("isaAlleel1").value;
+			//isaAlleel2 = document.getElementById("isaAlleel2").value;
+			connection.open("GET", "/Lisa?alleeliNimetus=" + alleeliNimetus.value + "&emaAlleel1=" + emaAlleel1.value + "&emaAlleel2=" + emaAlleel2.value + "&isaAlleel1=" + isaAlleel1.value + "&isaAlleel2=" + isaAlleel2.value, false);
+			connection.send(null);
+			document.getElementById("lapseGeen").innerHTML = connection.responseText;
+		}
+		
+		function otsiGeeni() {
+			connection.open("GET", "/Otsi?otsiAlleeliNimetust=" + otsiAlleeliNimetust.value, false);
+			connection.send(null);
+			document.getElementById("otsitudGeen").innerHTML = connection.responseText;
+
+		}
+
+		function valiGeenJaLisa() {
+			var alleel = [];
+			var alleeliNimetus = document.getElementById("alleeliNimetusId").innerHTML;
+			var tsykkel = document.getElementById("leitud").innerHTML;
+			for (i = 0; i < tsykkel; i++) {
+				if(document.getElementById("valik"+i).checked) {
+					alleel.push(document.getElementById("lapseAlleel1Id"+i).innerHTML)
+					alleel.push(document.getElementById("lapseAlleel2Id"+i).innerHTML)
+				}
+			}
+
+			connection.open("GET", "/Lisa?alleeliNimetus=" + alleeliNimetus + "&emaAlleel1=" + alleel[0] + "&emaAlleel2=" + alleel[1]+ "&isaAlleel1=" + alleel[2] + "&isaAlleel2=" + alleel[3], false);
+			connection.send(null);
+
+			document.getElementById("valitudLapseGeen").innerHTML = connection.responseText;
+			
+		}
+
+	</script>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id = "OtsiGeeni">
+		Otsi geeni:<br>
+		<input type = "text" id = "otsiAlleeliNimetust"><br>
+		<input type="button" value="otsi" onclick="otsiGeeni()">	
+	</div>
+
+
+	<div id = "LisaGeen">
+		Alleeli nimi:<br>
+		<input type = "text" id = "alleeliNimetus"><br>
+		Ema alleeli v22rtused:<br>
+		<input type = "text" id = "emaAlleel1"><br>
+		<input type = "text" id = "emaAlleel2"><br>
+		Isa alleeli v22rtused:<br>
+		<input type = "text" id = "isaAlleel1"><br>
+		<input type = "text" id = "isaAlleel2"><br>
+		<input type="button" value="lisa" onclick="lisaUusGeen()">	
+	</div>
+
+	<div id="lapseGeen">Lapse geeni väljastamise koht</div>
+	<div id="valitudLapseGeen">Lapse geeni väljastamise koht</div>
+	<!-- <div id="otsitudGeen">Otsitud geeni väljastamise koht</div> -->
+	<table class = "geenitabel">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>alleeli_nimetus </th>
+				<th>alleel 1 </th>
+				<th>alleel 2</th>
+				<th>valik</th>
+			</tr>
+		</thead>
+		<tbody id = "otsitudGeen"></tbody>
+		<input type="button" value="lisa valik" onclick="valiGeenJaLisa()">	
+
+
+</body>
+</html>
