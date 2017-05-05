@@ -13,9 +13,10 @@ public class Geen{
 			return true;
 		}
 		else{
-		return false;
+			return false;
 		}
-	}
+	}	
+	
 	public static void main(String argumendid[]){
 		Alleel al1 = new Alleel("Esimine", false);
 		Alleel al2 = new Alleel("Teine", true);
@@ -27,4 +28,17 @@ public class Geen{
 		System.out.println(geen2.Kontroll());
 		System.out.println(geen3.Kontroll());
 	}	
+	public Alleel AlRng(){
+        if(Math.random() < 0.51){
+			return alleel1;
+		}
+		else{
+			return alleel2;
+		}
+	}
+	public Geen RandomGeen(Geen geen1, Geen geen2){
+        return new Geen(geen1.AlRng(), geen2.AlRng());
+     }
+
 }
+
