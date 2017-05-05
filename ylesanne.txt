@@ -1,0 +1,39 @@
+Salat
+
+1.klass
+* Koosta klass toiduaine tarbeks (nimetus, valkude, rasvade ja süsivesikute protsent). - Toiduaine.java
+Protsent kokku ei saa ületada 100 - muidu antakse veateade.
+-Loo mõni toiduaine(nt kartul, hapukoor, vorst). Proov1.java
+
+2.klass
+Koosta klass toidukomponendi tarbeks (kogus, viit toiduainele). - Toidukomponent.java
+Loo mõned toidukomponendid (nt. 100g kartuleid, 30g hapukoort, 50g vorsti). Proov1.java
+Lisa toidukomponendile käsklus selle sees leiduva rasvakoguse arvutamiseks. - rasvakoguse_arvutaja()
+
+* Koosta andmebaasiliidesega veebileht, kus saab toiduaineid objektide kaudu
+- lisada
+- kustutada,
+- nime järgi andmeid vaadata
+- rasvaprotsendivahemiku järgi otsida.
+
+- Koosta:
+Lisamise,
+Arvutamise,
+Otsimise ja
+Kustutamise
+Kontrollimiseks automaattest.
+
+ * Koosta klass toidu jaoks (nimetus, toidukomponendid).
+Toidule käsklused küsimaks sisalduvate valkude, rasvade ja süsivesikute kogust.
+
+Loo retsepti järgi toit (nt kartulisalat) küsi iga salatis leiduvate toitainete kogused. /salat
+Koosta veebirakendus, kus näidatakse valitud toidu etteantud koguse (nt 5kg kartulisalatit) jaoks vajalikud toiduained.
+/kartuliSalat
+
+Kontrolli automaattestiga arvutuste õigsust.
+
+
+Käsud:
+scl enable rh-maven33 bash
+mvn package
+java -jar target/salat-1.0-SNAPSHOT.jar
