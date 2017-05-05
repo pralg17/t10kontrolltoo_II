@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Main{
 
 	Ioon hydrogen = new Ioon("Hydrogen", 12.0, 1);
+	Ioon nitrate = new Ioon("Nitrate", 62.0, -1);
 	@RequestMapping("/ioon")
 	public String giveName(){
 		return hydrogen.getName();
