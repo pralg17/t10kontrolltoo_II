@@ -15,9 +15,14 @@
 </head>
 
 <body>
+<center>
+  <br>
+  <a href="salatirakendus.html" class="btn btn-success" role="button">SALAT</a>
+  <br>
+  <br>
 <h2>Toiduained</h2>
 <div>
-    <table id="foodList"></table>
+    <table id="foodList" class="table table-inverse"></table>
 </div>
 
 <h2>Lisa toiduaine</h2>
@@ -27,23 +32,31 @@
 <input id="valgud_protsent" type="number"><br>
 <label>Rasvade protsent</label><br>
 <input id="rasvad_protsent" type="number"><br>
-<label>Süsivesikute protsent</label><br>
+<label>Susivesikute protsent</label><br>
 <input id="sysivesikud_protsent" type="number"><br>
 
-<input type="button" class="btn btn-info" value="lisa" onclick="addNewFood()">
+<input type="button" class="btn btn-success" value="lisa" onclick="addNewFood()">
 
 <h2>Kustuta</h2>
 <label>Toiduaine id</label><br>
-<input id="deleteFoodByID" type="text">
-<input type="button" class="btn btn-info" value="kustuta" onclick="deleteFood()">
+<input id="deleteFoodByID" type="number">
+<input type="button" class="btn btn-danger" value="kustuta" onclick="deleteFood()">
 
 <h2>Otsi rasvasisalduse vahemiku järgi </h2>
 <label>Minimum</label>
 <input id="findFoodFatMin" type="number"><br>
 <label>Maksimum</label>
 <input id="findFoodFatMax" type="number"><br>
-<input type="button" class="btn btn-info" value="Otsi" onclick="findFoodByFat()">
+<input type="button" class="btn" value="Otsi" onclick="findFoodByFat()">
+<br><br><br>
 
+<h2>Salat</h2>
+<br>
+<a href="salatirakendus.html" class="btn btn-success" role="button">SALAT</a>
+<br>
+
+
+</center>
 <script>
     var connection = new XMLHttpRequest();
     connection.onreadystatechange = foodData;
@@ -55,6 +68,7 @@
     displayAllFood();
 
     function addNewFood() {
+      //Võtab kõigile muutujatele sisestatud väärtuse HTML formist
         var toiduaine_nimetus = document.getElementById("toiduaine_nimetus").value;
         var valgud_protsent = document.getElementById("valgud_protsent").value;
 		    var rasvad_protsent = document.getElementById("rasvad_protsent").value;
@@ -75,13 +89,18 @@
     }
 
     function findFoodByFat(){
+      //Võtab HTML osast finFoodFatMin väärtuse
       var findFoodFatMin = document.getElementById("findFoodFatMin").value;
       var findFoodFatMax = document.getElementById("findFoodFatMax").value;
+      //Sisestab rasvaotsingusse Min ja Max väärtused, mille vahemiku võtab
       connection.open("GET","/rasvaotsing?rasvad_min=" + findFoodFatMin + "&rasvad_max=" + findFoodFatMax, true);
       connection.send();
     }
 
+
 </script>
+
+
 </body>
 
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        var connection = new XMLHttpRequest();
+        connection.onreadystatechange = salatiSisu;
+
+        function salatiAndmed() {
+           connection.open("GET", "/salat", true);
+            connection.send();
+        }
+        salatiAndmed();
+
+        function salatiSisu() {
+
+          //Vastus tuleb id-ga salatList HTMLi
+           document.getElementById("salatList").innerHTML = connection.responseText;
+        }
+
+        function tagastaSalatiKomponentideKogus() {
+            var salatiKogus = document.getElementById("salatiKogus").value;
+            connection.open("GET", "/kartuliSalat?vajalik_kogus=" + salatiKogus, true);
+            connection.send();
+        }
+
+    </script>
+
+
+</head>
+<body>
+
+<center>
+<h2>Salat</h2>
+<div>
+<br>
+<a href="index.html" class="btn btn-success" role="button">TOIDUAINED</a>
+<br>
+<br>
+<table id="salatList" class="table table-inverse"></table>
+
+</div>
+
+<br>
+<h2>Sisesta, kui palju soovid salatit valmistada </h2>
+<h3>Tagastatakse retsepti järgi vajaminevate komponentide kogus</h3>
+
+<label>Kogus</label>
+<input id="salatiKogus" type="number"><br>
+
+<input type="button" class="btn" value="Leia" onclick="tagastaSalatiKomponentideKogus()">
+
+</center>
+</body>
+</html>

@@ -2,7 +2,7 @@ Salat
 
 1.klass
 * Koosta klass toiduaine tarbeks (nimetus, valkude, rasvade ja süsivesikute protsent). - Toiduaine.java
-Protsent kokku ei saa ületada 100 - muidu antakse veateade. 
+Protsent kokku ei saa ületada 100 - muidu antakse veateade.
 -Loo mõni toiduaine(nt kartul, hapukoor, vorst). Proov1.java
 
 2.klass
@@ -25,6 +25,15 @@ Kontrollimiseks automaattest.
 
  * Koosta klass toidu jaoks (nimetus, toidukomponendid).
 Toidule käsklused küsimaks sisalduvate valkude, rasvade ja süsivesikute kogust.
-Loo retsepti järgi toit (nt kartulisalat) küsi iga salatis leiduvate toitainete kogused.
+
+Loo retsepti järgi toit (nt kartulisalat) küsi iga salatis leiduvate toitainete kogused. /salat
 Koosta veebirakendus, kus näidatakse valitud toidu etteantud koguse (nt 5kg kartulisalatit) jaoks vajalikud toiduained.
+/kartuliSalat
+
 Kontrolli automaattestiga arvutuste õigsust.
+
+
+Käsud:
+scl enable rh-maven33 bash
+mvn package
+java -jar target/salat-1.0-SNAPSHOT.jar

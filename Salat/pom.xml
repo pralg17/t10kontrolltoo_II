@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>ee.tlu.if16.jaagup</groupId>
+	<groupId>heino</groupId>
 	<artifactId>salat</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<parent>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-parent</artifactId>
@@ -23,6 +23,12 @@
 			<dependency>
 					<groupId>mysql</groupId>
 					<artifactId>mysql-connector-java</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<scope>test</scope>
 			</dependency>
 	</dependencies>
 	<build>
