@@ -1,5 +1,5 @@
 package brigitta;
 public interface Liides{
-	public int t2htesineb(char t2ht);
+	public int T2htesineb(char t2ht);
 	
 }

@@ -1,5 +1,5 @@
 package brigitta;
-public class Lause implements Liides{
+abstract class Lause implements Liides{
 	
 	}
   

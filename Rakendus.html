@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>rakendus</title>
+	<script>
+	  var yhendus=new XMLHttpRequest();
+	  yhendus.onreadystatechange=andmedSaabusid;
+	  function t2htesineb(){
+	     var lause=document.getElementById("kast1").value;  
+			var aadress="/rakendus?lause="+lause;
+		 yhendus.open("GET", aadress, true);
+		 yhendus.send();
+	  }
+	  function andmedSaabusid(){
+	     document.getElementById("vastus").innerHTML=yhendus.responseText;
+	  }
+	</script>
+  </head>
+  <body>
+    <input type="text" id="kast1">
+	<input type="button" value="leia mitu korda a t2ht selles lauses on" onclick="t2htesineb()"/>
+    
+	<div id="vastus">Vastuse koht</div>
+  </body>
+</html>
