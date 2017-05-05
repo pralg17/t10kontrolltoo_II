@@ -1,5 +1,6 @@
 package rauntege;
 
+//1.
 //Loo liides iooni andmete tarbeks - nimetus, aatommasside summa, laeng. Loo realiseeriv klasss, kus nimetus on stringina.
 //Koosta paar näidet - H+, NO3-
 //Koosta automaattest iooni loomise ning andmete küsimise kohta.
@@ -14,11 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class Main{
 
+	//Vesinik H+
 	Ioon hydrogen = new Ioon("Hydrogen", 12.0, 1);
+	//Nitraat NO3-
 	Ioon nitrate = new Ioon("Nitrate", 62.0, -1);
-	@RequestMapping("/ioon")
-	public String giveName(){
-		return hydrogen.getName();
+	
+	//Vesiniku väljatrükk
+	@RequestMapping("/hydrogen")
+	public String giveNameHydrogen(){
+		return "Name: " + hydrogen.getName();
+	}
+	
+	//Nitraadi väljatrükk
+	@RequestMapping("/nitrate")
+	public String giveNameNitrate(){
+		return "Name: " + nitrate.getName();
 	}
 
 	public static void main(String[] args){

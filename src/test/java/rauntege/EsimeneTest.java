@@ -8,6 +8,6 @@ public class EsimeneTest{
 	@Test
 	public void test1(){
 		Main m = new Main();
-		assertEquals("Hydrogen", m.giveName());
+		assertEquals("Name: Hydrogen", m.giveNameHydrogen());
 	}
 }
