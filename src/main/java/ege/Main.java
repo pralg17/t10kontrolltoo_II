@@ -1,13 +1,42 @@
 package ege;
 
+import java.util.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @SpringBootApplication
 public class Main{
-	@RequestMapping("/j6ed")
+	@Autowired
+	private ManageTable manager;
+	
+	@RequestMapping("/create")
+	String create(String nimetus, Double pikkus, Double vooluhulk, 
+					@RequestParam(name="sihtj6gi", defaultValue="", required=false) String sihtj6gi, 
+					@RequestParam(name="sihtj6eAsukoht", defaultValue="", required=false) Double sihtj6eAsukoht){
+		if(sihtj6gi.isEmpty() && sihtj6eAsukoht == null){
+		manager.save(new J6edEntity(nimetus, pikkus, vooluhulk));			
+		}else{
+		manager.save(new J6edEntity(nimetus, pikkus, vooluhulk, sihtj6gi, sihtj6eAsukoht));		
+		}
+		return nimetus+" saved";
+	}
+	
+	@RequestMapping("/search")
+	String Search(String nimetus){
+		if(nimetus.isEmpty()){return "pole infot";}
+		List<J6edEntity> j6gi=manager.findByNimetus(nimetus);
+		if(j6gi.isEmpty()){return nimetus+" pole antud j6ge";}
+		
+		return "<p>"+j6gi.get(0).nimetus.toString()+"</p>";
+	}
+	
+	
+	@RequestMapping("/arvutamine")
 	String j6ed(){
 		J6gi j1= new J6gi("Keila", 120, 6.5, null, 0);
 		J6gi j2=new J6gi("Vihula", 40, 4.5, j1, 80);
@@ -48,7 +77,7 @@ public class Main{
 	}
 	
 	public static void main(String[] args){
-		System.getProperties().put("server.port", 4567);
+		System.getProperties().put("server.port", 8080);
         SpringApplication.run(Main.class, args);
 	}
 }

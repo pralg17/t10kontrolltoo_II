@@ -1,8 +1,46 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Arvutamine</title>
-	</head>
-	<body>
-	</body>
+<head>
+	<title>Arvutamine</title>
+	<script>
+	var connection=new XMLHttpRequest();
+	connection.onreadystatechange=receivedData;
+	function create(){
+		var nimetus=document.getElementById("nimetus").value;
+		var pikkus=document.getElementById("pikkus").value;
+		var vooluhulk=document.getElementById("vooluhulk").value;
+		connection.open("GET", "/create?nimetus="+nimetus+"&pikkus="+pikkus+"&vooluhulk="+vooluhulk, true);
+		connection.send();
+	}
+	
+	function receivedData(){
+		document.getElementById("response").innerHTML=connection.responseText;
+	}
+	</script>
+</head>
+<body>
+<div id="response"></div>
+	<h1>Lisa j6gi</h1>
+	<div>
+	<label for="nimetus">J6e nimi:</label>
+	<input type="text" id="nimetus"/>
+	<br><br>
+	<label for="pikkus">J6e pikkus:</label>
+	<input type="number" id="pikkus"/>
+	<br><br>
+	<label for="vooluhulk">J6e vooluhulk:</label>
+	<input type="number" id="vooluhulk"/>
+	</div>
+	<br><br>
+	<label for="sihtj6gi">Sihtj6gi:</label>
+	<input type="text" id="sihtj6gi"/>
+	<br><br>
+	<label for="sihtj6eAsukoht">Sihtj6e asukoht:</label>
+	<input type="number" id="sihtj6eAsukoht"/>
+	<div>
+	<input type="button" value="Save" onclick="create()"/>
+	</div>
+	<div>
+	</div>
+</body>
 </html>
