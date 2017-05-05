@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Akordid</title>
+	<meta charset="UTF-8">
+	<script>
+	var kolmkõlaT2hed = "kolmkõlaT2hed=";   //aadressireale
+	var kasTähtedega = "&t2htedena="        //aadressireale
+	var sisestused = "";  
+	var yhendus = new XMLHttpRequest();
+	yhendus.onreadystatechange = andmedSaabusid;
+	
+	function lisa(){
+		document.getElementById("vastus").innerHTML = "";  //et vana vastust ei näitaks
+		var täht = document.getElementById("kast1").value;
+		sisestused += täht + " ";        //kogun sisestatud akorditähed
+		document.getElementById("sisestus").innerHTML = sisestused; //sisestused ekraanile
+		if(täht.charAt(1) == "#"){
+			täht = täht[0] + "%23";  //trellide asemele %23
+		}
+		console.log(täht);
+		kolmkõlaT2hed += täht + ",";  //lisan akorditähed aadressireale
+		console.log(kolmkõlaT2hed);
+	}
+	
+	function annaAndmed(){
+		 if(document.getElementById("kast2").checked){
+		   var midi = "jah"
+		 } else {
+		   var midi = "ei"
+		 }
+		 aadress = "/taktid?" + kolmkõlaT2hed + kasTähtedega + midi;   //aadressireale kogu kupatus
+		 console.log(aadress);
+		 yhendus.open("GET", aadress, true);     //funktsioon andmedSaabusid
+		 yhendus.send();         
+		 sisestused = "";       //kaotan sisestused
+		 midi = "";             //kaotan valiku kas midi v tähed
+	  }
+	  
+	   function andmedSaabusid(){
+	     document.getElementById("vastus").innerHTML = "Noodid: " + yhendus.responseText;  
+		 kolmkõlaT2hed = "kolmkõlaT2hed=";    //nullin sisestatud kolmkõlaT2hed
+	}
+	</script>
+	</head>
+  <body>
+	<p>Väljastatakse kolmkõla tähtedele vastavad noodid.</p>
+	<br>
+    <input type="text" id="kast1" placeholder="akorditäht">
+	<input type="button" value="Lisa akorditäht" onclick="lisa()" />
+	 <br>
+	 <p>Lisatud akorditähed: <span id="sisestus"></span></p>
+	<br>
+	<input type="checkbox" id="kast2">Kuva noodinimedega
+	<br>
+	<br>
+    <input type="button" value="Mängi noodid" onclick="annaAndmed()" />
+	<p><span id="vastus"></span></p>
+  </body>
+</html>
