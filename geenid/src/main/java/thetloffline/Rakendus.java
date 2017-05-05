@@ -90,7 +90,7 @@ public class Rakendus {
 		//lapseReesus.alleel1 = emaReesus.getRandomAlleel();
 		//lapseReesus.alleel2 = isaReesus.getRandomAlleel(); // reesus 1 v 2?
 
-		return "";
+		return "loodi uus geen: "+lapseReesus+" alleel1: "+emaReesus.getRandomAlleel()+" alleel2: "+isaReesus.getRandomAlleel();
 	}
 
 	public static void main(String[] args) {

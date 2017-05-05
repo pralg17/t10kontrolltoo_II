@@ -1,5 +1,5 @@
 package thetloffline;
-
+import java.util.Random;
 public class Geen {
 	private Alleel alleel1;
 	private Alleel alleel2;
@@ -20,11 +20,18 @@ public class Geen {
 	}
 
 	Alleel getRandomAlleel() {
-	 if (Math.random() > 0.5) {
+		Random rnd = new Random();
+		if (rnd.nextBoolean()) {
+		    return alleel1;
+		} else {
+		    return alleel2;
+		}
+
+	/* if (Math.random() > 0.5) {
             return alleel1;
         } else {
             return alleel2;
-        }
+        }*/
  	}
 
 }
