@@ -25,21 +25,20 @@ public class Proov{
 				System.out.println("Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + "km ja see suubub merre läbi jõgede: ");
 
 				j=i;
-				kogupikkus = jogi.get(i).pikk;
+				kogupikkus = jogi.get(i).pikk + jogi.get(i).suubum;
 				while (jogi.get(j).siht != "") {
 					System.out.println(jogi.get(j).siht);
-					
 					
 					for(int k=0; k<jogi.size(); k++) {
 						if (jogi.get(k).nim == jogi.get(j).siht) {
 							j=k;
-							kogupikkus += jogi.get(k).pikk;
+							kogupikkus += jogi.get(k).suubum;
 						}
 					}
 					
 				}
 				
-				System.out.println("ning see teeb kogupikkuseks " + kogupikkus + "km.");
+				System.out.println("mis teeb kogupikkuseks " + kogupikkus + "km.");
 			}
 			System.out.println();
 		}

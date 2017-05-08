@@ -13,13 +13,4 @@ public class Jogi {
 		suubum=suubumisKm;
 	}
 	
-/* 	public String getNimi() {
-		return nim;
-	}
-	
-	public String toString() {
-		
-		return "Jõe '" + nim +  "' pikkus on " + pikk + "km ja see tõenäoliselt suubub kunagi kuhugi.";
-	} */
-	
 }

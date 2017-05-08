@@ -17,13 +17,12 @@ public class Rakendus {
     }
 	
 	@RequestMapping("/jogi")
-	String otsing(String nimi) {
+	String joefunktsioon(double algus) {
 
 	
 		int j, i;
 		double kogupikkus;
 		String sisend;
-
 		
 		ArrayList<Jogi> jogi= new ArrayList<Jogi>();
 		
@@ -33,7 +32,7 @@ public class Rakendus {
 		jogi.add(new Jogi("Keskpäne", 57, 12, "Pirakas", 112));
 		jogi.add(new Jogi("Nääps", 8, 1, "Pisike", 3));
 
-		sisend = "Nääps";
+ 		sisend = "Nääps";
 		i = -1;
 		
 		for(int l=0; l<jogi.size(); l++) {
@@ -42,37 +41,34 @@ public class Rakendus {
 			}
 		}
 		
-		if(i!=-1) {
+		if(i!=-1 && algus<=jogi.get(i).pikk) {
 			if( jogi.get(i).siht == "" ) {
-				return "Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + "km ja see suubub otse merre";
+				return "Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + " km ja see suubub otse merre. Etteantud kohast mereni on " + algus + " km";
 			} else {
 
 				j=i;
-				kogupikkus = jogi.get(i).pikk;
+				kogupikkus = algus + jogi.get(i).suubum;
 				StringBuffer sb=new StringBuffer();
 				while (jogi.get(j).siht != "") {
-					sb.append(jogi.get(j).siht + " ");
+					sb.append(jogi.get(j).siht + ", ");
 					
 					
 					for(int k=0; k<jogi.size(); k++) {
 						if (jogi.get(k).nim == jogi.get(j).siht) {
 							j=k;
-							kogupikkus += jogi.get(k).pikk;
+							kogupikkus += jogi.get(k).suubum;
 						}
 					}
 					
 				}
 				
-				return "Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + " km ja see suubub merre läbi jõgede: " + sb.toString() + " ning kogupikkuseks tuleb " + kogupikkus;
+				return "Jõe '" + jogi.get(i).nim +  "' pikkus on " + jogi.get(i).pikk + " km ja see suubub merre läbi jõgede: " + sb.toString() + " ning etteantud kohast mereni on " + kogupikkus + " km.";
 			}
 		} else {
-			return "Sellise jõe kohta info puudub.";
+			return "Viga etteantud andmetes";
 		}
-	
 
 	}
-	
-	
 	
  
     public static void main(String[] args) {
@@ -81,4 +77,14 @@ public class Rakendus {
     }
 }
 
+
+/* 
+scl enable rh-maven33 bash
+mvn package
+java -jar target/t10-1.jar
+greeny.cs.tlu.ee:4218/jogi?algus=7
+*/ 
+ 
+ 
+ 
 
