@@ -22,11 +22,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>1.5.2.RELEASE</version>
 		</dependency>
-    <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.11</version>
-</dependency>
     </dependencies>
     <build>
         <plugins>
