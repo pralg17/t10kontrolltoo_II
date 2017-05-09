@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 public class Rakendus{	
 	
+	//KOOLI ARVUTIS:
 	//http://greeny.cs.tlu.ee:4207/kolmkola?pohitoon=c
 	//http://greeny.cs.tlu.ee:4207/kolmkola?pohitoon=f
 	//http://greeny.cs.tlu.ee:4207/kolmkola?pohitoon=g
+
 	
 	@RequestMapping("/kolmkola")
 	String kolmkola(String pohitoon){
-		//TEST---> return "Põhitoon on: " + pohitoon;
 		
-		//if(pohitoon == "c"){
 		//peab oleama IF lauses EQUALS, muidu ei tööta
 		//VÕIB ANDA ERALDI TAKTIDE AKORDITÄHED
 		if(pohitoon.equals("c")){
@@ -27,15 +27,13 @@ public class Rakendus{
 			Kolmkola noot = new CKolmkola();
 			return "Mängitavad noodid akordiga c on: "+noot.vastus();
 		
-		} else if (pohitoon.equals("f")){
+		} else if(pohitoon.equals("f")){
 			
-			//return "Põhitoon on: " + pohitoon;
 			Kolmkola noot = new FKolmkola();
 			return "Mängitavad noodid akordiga f on: "+noot.vastus();
 			
-		} else if (pohitoon.equals("g")){
+		} else if(pohitoon.equals("g")){
 			
-			//return "Põhitoon on: " + pohitoon;
 			Kolmkola noot = new GKolmkola();
 			return "Mängitavad noodid akordiga g on: "+noot.vastus();
 			
@@ -44,6 +42,43 @@ public class Rakendus{
 			return "See ei ole akordtäht. Peab sisestama akordi c, g või f.";
 		}
 	}
+	
+	
+	//http://greeny.cs.tlu.ee:4207/kolmkola2?akordid=cfg&kuidas=arv
+	@RequestMapping("/kolmkola2")
+	String kolmkola2(String akordid, String kuidas){
+		
+		Lugu song = new Lugu();
+		
+		String eraldiakord = "";
+		
+		//TÜKELDAN
+		for(int i=0; i<akordid.length();i++){
+			eraldiakord = akordid.substring(i, i+1);
+			
+			
+			if(eraldiakord.equals("c")){
+				
+				Kolmkola akord = new CKolmkola();
+				Kolmkola lootakt = song.taktirida(akord, kuidas);
+				
+			} 
+			if(eraldiakord.equals("f")){
+				
+				Kolmkola akord = new FKolmkola();
+				Kolmkola lootakt = song.taktirida(akord, kuidas);
+				
+			}
+			if(eraldiakord.equals("g")){
+				
+				Kolmkola akord = new GKolmkola();
+				Kolmkola lootakt = song.taktirida(akord, kuidas);
+
+			}
+		}
+		return song.akordid();
+	}
+	
 	
 	public static void main(String[] args){
 		System.getProperties().put("server.port", 4207);
