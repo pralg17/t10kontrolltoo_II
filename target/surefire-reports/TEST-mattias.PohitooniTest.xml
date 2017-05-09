@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="mattias.PohitooniTest" time="0.01" tests="2" errors="0" skipped="0" failures="1">
+<testsuite name="mattias.PohitooniTest" time="0.011" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el6_8.x86_64/jre/lib/amd64"/>
@@ -57,12 +57,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="pohitoonitest2" classname="mattias.PohitooniTest" time="0.01">
-    <failure message="expected:&lt;[64 68 71]&gt; but was:&lt;[76 80 83]&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<[64 68 71]> but was:<[76 80 83]>
-	at org.junit.Assert.assertEquals(Assert.java:115)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at mattias.PohitooniTest.pohitoonitest2(PohitooniTest.java:42)
-]]></failure>
-  </testcase>
-  <testcase name="pohitoonitest3" classname="mattias.PohitooniTest" time="0"/>
+  <testcase name="luguTest" classname="mattias.PohitooniTest" time="0.01"/>
+  <testcase name="luguTest2" classname="mattias.PohitooniTest" time="0"/>
+  <testcase name="pohitoonitest" classname="mattias.PohitooniTest" time="0"/>
+  <testcase name="akorditestC" classname="mattias.PohitooniTest" time="0.001"/>
+  <testcase name="akorditestF" classname="mattias.PohitooniTest" time="0"/>
+  <testcase name="akorditestG" classname="mattias.PohitooniTest" time="0"/>
 </testsuite>
