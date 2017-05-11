@@ -1,0 +1,16 @@
+CREATE TABLE joed(
+  nr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nimi VARCHAR(30),
+  pikkus FLOAT,
+  vooluhulk FLOAT,
+  sihtjogi VARCHAR(30),
+  suubub INT
+);
+
+
+INSERT INTO joed VALUES (DEFAULT, "Pirakas", 150, 32, "", 0);
+INSERT INTO joed VALUES (DEFAULT, "Keskmik", 88, 15, "Pirakas", 18);
+INSERT INTO joed VALUES (DEFAULT, "Pisike", 12, 3, "Keskmik", 67);
+INSERT INTO joed VALUES (DEFAULT, "Keskp‰rane", 57, 12, "Pirakas", 112);
+INSERT INTO joed VALUES (DEFAULT, "N‰‰ps", 8, 1, "Pisike", 3);
+
