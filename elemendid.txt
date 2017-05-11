@@ -1,0 +1,24 @@
+
+
+ained:
+
+Ca(+2), H2SO4(+6), H(+1), O(-2), H2O2(-1), Na(+1), Mg(+2), K(+1), Fe(+2), Cu(+2), Al(+3)
+F(-1), Cl(-1), Br(-1)
+
+
+
+* 		Element ja sellele vastav iooni laeng + kogus
+		N: H (+1), NO3(-1), Mg(+2)
+
+		Aatommassid ja nende elementide SUMMA
+		
+		**********
+		Nimetus
+		Aatommasside summa
+		Laeng
+		**********
+		
+		
+//scl enable rh-maven33 bash
+//mvn package
+//java -jar target/testimine-1.jar
