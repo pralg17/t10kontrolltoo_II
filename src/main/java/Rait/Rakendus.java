@@ -17,12 +17,11 @@ public class Rakendus {
     }
 	
 	@RequestMapping("/jogi")
-	String joefunktsioon(double algus) {
+	String joefunktsioon(String sisend, double algus) {
 
 	
 		int j, i;
 		double kogupikkus;
-		String sisend;
 		
 		ArrayList<Jogi> jogi= new ArrayList<Jogi>();
 		
@@ -32,11 +31,10 @@ public class Rakendus {
 		jogi.add(new Jogi("Keskpäne", 57, 12, "Pirakas", 112));
 		jogi.add(new Jogi("Nääps", 8, 1, "Pisike", 3));
 
- 		sisend = "Nääps";
 		i = -1;
 		
 		for(int l=0; l<jogi.size(); l++) {
-			if (sisend == jogi.get(l).nim) {
+			if (sisend.equals(jogi.get(l).nim)) {
 				i=l;
 			}
 		}
@@ -82,7 +80,7 @@ public class Rakendus {
 scl enable rh-maven33 bash
 mvn package
 java -jar target/t10-1.jar
-greeny.cs.tlu.ee:4218/jogi?algus=7
+greeny.cs.tlu.ee:4218/jogi?sisend=Nääps&algus=7
 */ 
  
  
