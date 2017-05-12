@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<title>Arvutamine</title>
+  <script>
+  var yhendus=new XMLHttpRequest();
+  yhendus.onreadystatechange=andmedSaabusid;
+  function alleeli(){
+    var e = document.getElementById("alleel1");
+    var a1 = e.options[e.selectedIndex].value;
+    var x = document.getElementById("alleel2");
+    var a2 = x.options[x.selectedIndex].value;
+    var y1 = document.getElementById("x1").value;
+    var y2 = document.getElementById("x2").value;
+    console.log(a1);
+    console.log(a2);
+    console.log(y1);
+    console.log(y2);
+
+    var aadress="/plusalleel?alleel1="+y1+"&alleel2="+y2+"&y1="+a1+"&y2="+a2;
+    yhendus.open("GET", aadress, true);
+    yhendus.send();
+  }
+  function andmedSaabusid(){
+    document.getElementById("vastus").innerHTML=yhendus.responseText;
+  }
+  </script>
+</head>
+<h1>Annab posiivse tulemuse kui üks väärtus on positiivne.</h1>
+<a href=sisu.html>Tagasi</a>
+<br></br>
+<body>
+  <input type="text" id="x1" placeholder="Alleel1" >
+  <select id="alleel1">
+  <option value="0" checked> negatiivne </option>
+  <option value="1" > positiivne</option>
+</select>
+  <br></br>
+  <input type="tsxt" id="x2" placeholder="Alleel2" >
+  <select id="alleel2">
+  <option value="0"> negatiivne</option>
+  <option value="1" checked> positiivne</option>
+</select>
+<br></br>
+
+  <input type="button" value="Kas üks geenidest on positiivne" onclick="alleeli()"/>
+  <div id="vastus">Vastus</div>
+</body>
+</html>
