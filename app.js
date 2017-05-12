@@ -1,4 +1,4 @@
-//veebiserver
+//veebiserver aadressil draama.duckdns.org:30001
 var express = require("express")
 	var bodyParser = require('body-parser')
 	var fs = require("fs")
