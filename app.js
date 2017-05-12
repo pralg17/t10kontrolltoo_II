@@ -55,7 +55,7 @@ Toidukomponent.prototype.rasvad = function () {
 		})
 		//rasvakoguse arvutamine
 		if (tulemused.length > 0) {
-			console.log(this.kogus+"grammi "+this.viide+" sisaldab rasva " + tulemused[0] / 100 * self.kogus + " grammi")
+			console.log(this.viide+": kogus "+this.kogus+" grammi, "+" sisaldab rasva " + tulemused[0] / 100 * self.kogus + " grammi")
 		} else {
 			console.log("toiduainet ei leitud")
 		}
