@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<title>Arvutamine</title>
+  <script>
+  var yhendus=new XMLHttpRequest();
+  yhendus.onreadystatechange=andmedSaabusid;
+  function alleeliliitja(){
+      var e1 = document.getElementById("reesus1");
+    var a1 = e1.options[e1.selectedIndex].value;
+      var x1 = document.getElementById("reesus2");
+    var a2 = x1.options[x1.selectedIndex].value;
+    var y1 = document.getElementById("x1").value;
+    var y2 = document.getElementById("x2").value;
+
+      var e2 = document.getElementById("reesus3");
+    var a3 = e2.options[e2.selectedIndex].value;
+      var x2  = document.getElementById("reesus4");
+    var a4 = x2.options[x2.selectedIndex].value;
+    var y3 = document.getElementById("x3").value;
+    var y4 = document.getElementById("x4").value;
+    console.log(a1);
+    console.log(a2);
+
+    var aadress="/geenilooja?alleel1="+y1+"&alleel2="+y2+"&alleel3="+y3+"&alleel4="+y4+
+    "&vaartus1="+a1+"&vaartus2="+a2+"&vaartus3="+a3+"&vaartus4="+a4;
+    ;
+    yhendus.open("GET", aadress, true);
+    yhendus.send();
+  }
+  function andmedSaabusid(){
+    document.getElementById("vastus").innerHTML=yhendus.responseText;
+  }
+  </script>
+</head>
+<h1>Geeni alleelide liitaj.</h1>
+<a href=sisu.html>Tagasi</a>
+<br></br>
+
+<body>
+  <h2>Isa Geeni alleelid</h2>
+  <input type="text" id="x1" placeholder="Isa Alleel1" >
+  <select id="reesus1">
+    <option value=1> +</option>
+    <option value=0> -</option>
+  </select>
+  <input type="tsxt" id="x2" placeholder="Isa Alleel2" >
+    <select id="reesus2">
+      <option value=1> +</option>
+      <option value=0> -</option>
+    </select>
+  <br></br>
+  <h2>Ema geeni alleelid</h2>
+  <input type="text" id="x3" placeholder="Ema Alleel1" >
+  <select id="reesus3">
+    <option value=1> +</option>
+    <option value=0> -</option>
+  </select>
+  <input type="tsxt" id="x4" placeholder="Ema Alleel2" >
+  <select id="reesus4">
+    <option value=1> +</option>
+    <option value=0> -</option>
+  </select>
+<br></br>
+  <input type="button" value="Kahe Isend geenide tulemus" onclick="alleeliliitja()"/>
+  <div id="vastus">Vastus</div>
+</body>
+</html>

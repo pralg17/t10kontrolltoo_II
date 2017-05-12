@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<title>Arvutamine</title>
+  <script>
+  var yhendus=new XMLHttpRequest();
+  yhendus.onreadystatechange=andmedSaabusid;
+  function geeniliitja(){
+    var e = document.getElementById("g1");
+    var a1 = e.options[e.selectedIndex].value;
+    var x = document.getElementById("g2");
+    var a2 = x.options[x.selectedIndex].value;
+    console.log(a1);
+    console.log(a2);
+
+    var aadress="/geeniliitja?g1="+a1+"&g2="+a2;
+    yhendus.open("GET", aadress, true);
+    yhendus.send();
+  }
+  function andmedSaabusid(){
+    document.getElementById("vastus").innerHTML=yhendus.responseText;
+  }
+  </script>
+</head>
+<h1>Paneb joogi pudelisse.</h1>
+<a href=arvutus1.html>Paenb joogi kasti</a>
+<br></br>
+<body>
+  <select id="g1">
+  <option value="geen1" checked> Geen1</option>
+  <option value="geen2" > Geen2</option>
+</select>
+  <br></br>
+  <select id="g2">
+  <option value="geen2"> Geen2</option>
+  <option value="geen1"> Geen1</option>
+</select>
+<br></br>
+
+  <input type="button" value="kahe suvalise geenialleli summa" onclick="geeniliitja()"/>
+  <div id="vastus">Vastus</div>
+</body>
+</html>
