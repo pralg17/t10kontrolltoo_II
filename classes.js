@@ -67,7 +67,7 @@ const Toit = class {
                 .then(data => {
                     if(data == null) throw Error("Komponent ei ole loodud!")
                     this.komponendid.push(data);
-                    this.kogused.push(koostis[i].kogus), this.kogus +=koostis[i].kogus
+                    this.kogused.push(koostis[i].kogus), this.kogus += parseInt(koostis[i].kogus)
                 })
                 .catch(e=>console.log(e))
         }
@@ -89,11 +89,12 @@ const Toit = class {
     arvutaKomponendid(kokku) {
         let tulemused = []
         for(let i=0; i<this.komponendid.length; i++) {
-        }
-        for(let i=0; i<this.komponendid.length; i++) {
-            tulemused.push(`${this.komponendid[i].nimi}: ${kokku/this.kogus*this.kogused[i]}`)
+            console.log(kokku, this.kogused[i], this.kogus)
+            tulemused.push(`${this.komponendid[i].nimi}: ${(kokku*this.kogused[i]/this.kogus)}`)
         }
         return(tulemused)
     }
 }
 module.exports = { Toiduaine, Toidukomponent, Toit }
+
+

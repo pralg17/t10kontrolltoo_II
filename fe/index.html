@@ -55,13 +55,13 @@
         const grab = id => document.getElementById(id)
 
         let components = []
-
+        //Komponendi ajutisse massiivi lisamine
         grab('addComponent').addEventListener('click', (e)=>{
             e.preventDefault
             components.push({_id: grab('componentId').value, kogus: grab('componentAmt').value})
             grab('foodComponentStash').innerHTML = JSON.stringify(components)
         })
-
+        //Toidu detailide küsimine
         grab('foodDetails').addEventListener('click',()=>{
             let nimi = grab('detailsName').value
             let kogus = grab('detailsAmt').value
@@ -71,6 +71,7 @@
                     .then(data => grab('detailsPlaceholder').innerHTML = JSON.stringify(data))
             }
         })
+        //Toidu lisamine
         grab('addFood').addEventListener('click', ()=>{
             let nimi = grab('foodName').value
             if(nimi.length>0 && components.length>0) {
@@ -85,7 +86,7 @@
                     koostis: components
                 })
                 }).then(res => res.json())
-                .then(data => alert(data))
+                .then(data => alert(data), components = [], grab('detailsPlaceholder').innerHTML = "")
                 .catch(e => alert(e))
             }
         })
