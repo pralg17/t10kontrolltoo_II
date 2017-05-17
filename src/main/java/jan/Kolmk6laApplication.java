@@ -4,8 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -14,20 +12,20 @@ import javax.servlet.http.HttpSession;
 public class Kolmk6laApplication {
 	
 	@RequestMapping("/kolmk6lad")
-	String Kolmk6lad(String P6hitoonid) {
-		if(P6hitoonid.equals("c")) {
+	String Kolmk6lad(String p6hitoon) {
+		if(p6hitoon.equals("c")) {
 			Kolmk6la p6hiheli = new CKolmk6la();
 			return p6hiheli.toString();
 		}
 		
 		
 		
-		if(P6hitoonid.equals("f")) {
+		if(p6hitoon.equals("f")) {
 			Kolmk6la p6hiheli = new FKolmk6la();
 			return p6hiheli.toString();
 		}
 		
-		if(P6hitoonid.equals("g")){
+		if(p6hitoon.equals("g")){
 			Kolmk6la p6hiheli = new GKolmk6la();
 			return p6hiheli.toString();
 		}
