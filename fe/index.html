@@ -20,11 +20,76 @@
     <h3>Kõik tulemused:</h3>
     <button id="refresh">Uuenda:</button>
     <div id="k6ik"></div>
+    <div>
+        <h3>Otsi rasvaprotsendi j2rgi</h3>
+        <input type="text" id="searchmin">
+        <input type="text" id="searchmax">
+        <button id="submitsearch">Otsi</button>
+        <div id="searchresults"></div>
+    </div>
+    <div>
+        <h3>Toidud:</h3>
+        <button id="refreshFoods">Uuenda:</button>
+        <div id="foods"></div>
+    </div>
+    <div>
+        <h3>Lisa toit:</h3>
+        <input type="text" placeholder="komponendi ID" id="componentId">
+        <input type="number" placeholder="komponendi kogus grammides" id="componentAmt">
+        <button id="addComponent"> Lisa komponent</button>
+        <div id="foodComponentStash"></div>
+        <input type="text" id="foodName" placeholder="Toidu nimi">
+        <button id="addFood"> Lisa toit </button>
+    </div>
+    <div>
+        <h3>Arvuta komponentide koguseid:</h3>
+        <input type="text" placeholder = "Toidu täpne nimi" id="detailsName">
+        <input type="number" placeholder="Toidu soovitud kogus" id="detailsAmt">
+        <button id="foodDetails"> Arvuta </button>
+        <div id="detailsPlaceholder"></div>
+    </div>
 </body>
 <script>
     window.onload = function(){
         //Lühendan d.getElementById:
         const grab = id => document.getElementById(id)
+
+        let components = []
+
+        grab('addComponent').addEventListener('click', (e)=>{
+            e.preventDefault
+            components.push({_id: grab('componentId').value, kogus: grab('componentAmt').value})
+            grab('foodComponentStash').innerHTML = JSON.stringify(components)
+        })
+
+        grab('foodDetails').addEventListener('click',()=>{
+            let nimi = grab('detailsName').value
+            let kogus = grab('detailsAmt').value
+            if(nimi!=="" && kogus>0) {
+                fetch(`http://localhost:3456/toit/${nimi}/${kogus}`)
+                    .then(res => res.json())
+                    .then(data => grab('detailsPlaceholder').innerHTML = JSON.stringify(data))
+            }
+        })
+        grab('addFood').addEventListener('click', ()=>{
+            let nimi = grab('foodName').value
+            if(nimi.length>0 && components.length>0) {
+                fetch('http://localhost:3456/toit', {
+                    method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nimi: nimi,
+                    koostis: components
+                })
+                }).then(res => res.json())
+                .then(data => alert(data))
+                .catch(e => alert(e))
+            }
+        })
+
         //Targetin välju..
         let nimi=grab("nimi"), valgud=grab("valgud"),
             rasvad=grab('rasvad'), sysivesikud=grab('sysivesikud')
@@ -51,13 +116,19 @@
         )
         grab('refresh').addEventListener('click', function(e) {
             e.preventDefault();
-            fetch('http://localhost:3456/')
+            fetch('http://localhost:3456/k6ik')
                 .then(res => res.json())
                 .then(data => grab('k6ik').innerHTML = JSON.stringify(data))
         })
+        grab('refreshFoods').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch('http://localhost:3456/toidud')
+                .then(res => res.json())
+                .then(data => grab('foods').innerHTML = JSON.stringify(data))
+        })
         grab("delete").addEventListener("click", function(e){
             e.preventDefault();
-            fetch("http://localhost:3456", {
+            fetch("http://localhost:3456/"+grab("deletebyname").value, {
                 body: JSON.stringify({nimi: grab("deletebyname").value}),
                 method: "delete",
                 headers: {
@@ -69,6 +140,15 @@
                 .then(data => alert(data))
                 .catch(e => alert(e))
         })
+        grab("submitsearch").addEventListener('click', (e)=> {
+            e.preventDefault
+            fetch("http://localhost:3456/otsi/toiduaine/"+grab("searchmin").value+"/"+grab("searchmax").value)
+                .then(res => res.json())
+                .then(data => grab("searchresults").innerHTML = JSON.stringify(data))
+                .catch(e => alert(e))
+        })
+
+
         
     }
 

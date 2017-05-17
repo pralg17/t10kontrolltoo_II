@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const m = require("./Toiduaine.model")
 
 const Toiduaine = class {
     constructor(nimi,valgud,rasvad,süsivesikud) {
@@ -47,4 +48,52 @@ const Toidukomponent = class extends Toiduaine {
         this.rasvakogus = (this.rasvad/100)*this.kogus
     }
 }
-module.exports = { Toiduaine, Toidukomponent }
+const Toit = class {
+    constructor(nimi, koostis) {
+        if(typeof(koostis) !== "object") {
+            throw new Error("Koostis peab olema objekt!")
+        }
+        if(nimi) {
+            this.nimi = nimi
+        } else {
+            throw Error("Nimi puudub!")
+        }
+        this.koostis = koostis
+        this.kogus = 0
+        this.komponendid = []
+        this.kogused = []
+        for(let i=0; i<koostis.length; i++) {
+            m.üks(koostis[i]._id)
+                .then(data => {
+                    if(data == null) throw Error("Komponent ei ole loodud!")
+                    this.komponendid.push(data);
+                    this.kogused.push(koostis[i].kogus), this.kogus +=koostis[i].kogus
+                })
+                .catch(e=>console.log(e))
+        }
+    }
+    annaSisaldused() {
+        let rasvad=0,süsivesikud=0,valgud=0,i=0
+        for(let i=0;i<this.komponendid.length;i++) {
+            rasvad += (this.komponendid[i].rasvad/this.kogused[i]*100);
+            valgud+=(this.komponendid[i].valgud/this.kogused[i]*100)
+            süsivesikud+=(this.komponendid[i].süsivesikud/this.kogused[i]*100)
+        }
+        console.log(rasvad,valgud,süsivesikud)
+        return({
+            rasvad: rasvad,
+            valgud: valgud,
+            süsivesikud: süsivesikud
+        })
+    }
+    arvutaKomponendid(kokku) {
+        let tulemused = []
+        for(let i=0; i<this.komponendid.length; i++) {
+        }
+        for(let i=0; i<this.komponendid.length; i++) {
+            tulemused.push(`${this.komponendid[i].nimi}: ${kokku/this.kogus*this.kogused[i]}`)
+        }
+        return(tulemused)
+    }
+}
+module.exports = { Toiduaine, Toidukomponent, Toit }

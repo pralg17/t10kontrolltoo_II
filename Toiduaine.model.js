@@ -22,7 +22,13 @@ const kõik = () => {
     return ToiduaineModel.find({})
 }
 const kustuta = nimi => {
-    return ToiduaineModel.findOneAndDelete({nimi: nimi})
+    return ToiduaineModel.findOneAndRemove({nimi: nimi})
+}
+const otsivahemik = (min, max) => {
+    return ToiduaineModel.find({rasvad:{ $gte: min, $lte: max }})
+}
+const üks = (id) => {
+    return ToiduaineModel.findOne({_id: id})
 }
 
-module.exports = {uus, kõik, kustuta}
+module.exports = {uus, kõik, kustuta, otsivahemik, üks}
