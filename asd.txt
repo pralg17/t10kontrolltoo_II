@@ -1,0 +1,18 @@
+Joone arvutamise valem võiks välja näha umbes järgmiselt:
+
+Sisse võetakse X Double tüüpi muutujana.
+
+(y=ax+b)
+
+class joonevõrrand extends lineaarvõrrand (a,b) {
+    super(a,b);
+    leiaX(x) {
+        return ((this.a*x)+b)
+    }
+}
+
+Päringu vastu võtmine ning arvutus toimuks Node Express najal järgmiselt:
+
+app.get("/LV/joonepunkt/:x", (req,res)) {
+    res.send(`Joon lõikub Y-ga punktis ${joonevõrrand.leiaX(req.params.x)}.`)
+}
