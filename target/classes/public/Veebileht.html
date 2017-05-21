@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+	var yhendus=new XMLHttpRequest();
+	yhendus.onreadystatechange=gotValues;
+	function pressing(){
+		var a1=document.getElementById("kast1").value;
+		var a2=document.getElementById("kast2").value;
+		if (a1.length>0 && a2.length==0){
+			console.log("esimene if");
+			yhendus.open("GET","/xValue?x="+a1+"&a=0", true);
+			yhendus.send();
+		}
+		
+		else if(a1.length>0 && a2.length>0){
+			console.log("teine if");
+			yhendus.open("GET","/Vabaliige?x="+a1+"&vabaliige="+a2, true);
+			yhendus.send();
+		}
+		
+		
+	}
+
+	function gotValues(){
+		document.getElementById("vastus").innerHTML=yhendus.responseText;
+	}
+	
+	</script>
+</head>
+<body>
+    <h1>Y=AX+b</h1>
+	<input type="text" id="kast1" placeholder="x"/>
+	<br><br>
+	<input type="text" id="kast2" placeholder="vabaliige" />
+	<br><br>
+	<input type="button" value="Arvuta" onclick="pressing()"/>
+	<br><br>
+	<div id="vastus">Answers:</div>
+</body>
+</html>
