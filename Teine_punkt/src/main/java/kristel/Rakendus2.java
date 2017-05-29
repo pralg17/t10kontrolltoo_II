@@ -20,11 +20,11 @@ package kristel;
      s.lisa(tekst);
      HarilikT2heLoendur[] m = s.kysiS6nad();
      for(int i=0; i<m.length; i++){
-          abi += m[i].kysiS6na()+"(a tähti: "+m[i].paljuT2hti('a')+")"+"<br>";
+          abi += m[i].kysiS6na()+"( a-si: "+m[i].paljuT2hti('a')+")"+"<br>";
         }
-        return "Lause: "+s.kysi()+"<br>"+"Lauses a tähti kokku: "+s.paljuT2hti('a')
-        +"<br>"+"Lauses sõnu kokku: "+s.paljusõnuon()
-        +"<br>"+"Sõnad eraldi: <br>"+abi;
+        return "Antud lause: "+s.kysi()+"<br>"+" a tähti selles lauses: "+s.paljuT2hti('a')
+        +"<br>"+"Sõnade arv: "+s.paljusõnuon()
+        +"<br>"+"Sõnades a tähti: <br>"+abi;
      }
 
    @RequestMapping("/tähed")
